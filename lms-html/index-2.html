@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edustudy Home Alt | LMS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{primary:'#6d28d9',soft:'#f3f4f6',cream:'#faf7f2'}}}};</script>
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="bg-cream text-slate-800">
+  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-2 font-extrabold text-primary text-xl"><div class="w-9 h-9 rounded-lg bg-primary text-white flex items-center justify-center">Si</div></a>
+      <nav class="hidden md:flex gap-6 text-sm font-medium">
+        <a href="index.html" class="hover:text-primary">Home</a>
+        <a href="courses.html" class="hover:text-primary">Courses</a>
+        <a href="courses-topfilter.html" class="hover:text-primary">Top Filter</a>
+        <a href="faculty.html" class="hover:text-primary">Faculty</a>
+        <a href="shop.html" class="hover:text-primary">Shop</a>
+        <a href="blog.html" class="hover:text-primary">Blog</a>
+        <a href="events.html" class="hover:text-primary">Events</a>
+        <a href="contact.html" class="hover:text-primary">Contact</a>
+      </nav>
+      <div class="flex gap-3"><a href="login.html" class="px-4 py-2 text-sm rounded-lg border">Login</a><a href="register.html" class="px-4 py-2 text-sm rounded-lg bg-primary text-white">Register</a></div>
+    </div>
+  </header>
+
+  <section class="relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-10 items-center">
+      <div>
+        <span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">Modern • Academic • Scalable</span>
+        <h1 class="mt-4 text-4xl md:text-5xl font-extrabold leading-tight">A complete education template for universities and academies</h1>
+        <p class="mt-4 text-slate-600">Multiple homepages, course layouts, dashboards, shop, blog, events and more—built with Tailwind CSS.</p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-3">
+          <a href="courses.html" class="px-6 py-3 rounded-lg bg-primary text-white font-semibold">Browse Courses</a>
+          <a href="courses-topfilter.html" class="px-6 py-3 rounded-lg border">Quick Filter</a>
+        </div>
+        <div class="mt-10 grid grid-cols-3 gap-6 text-center">
+          <div class="bg-white rounded-xl p-4 shadow"><div class="text-2xl font-extrabold">120+</div><div class="text-xs text-slate-500">Courses</div></div>
+          <div class="bg-white rounded-xl p-4 shadow"><div class="text-2xl font-extrabold">80+</div><div class="text-xs text-slate-500">Instructors</div></div>
+          <div class="bg-white rounded-xl p-4 shadow"><div class="text-2xl font-extrabold">35k+</div><div class="text-xs text-slate-500">Students</div></div>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="aspect-[4/3] rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-600 shadow-lg"></div>
+        <div class="absolute -bottom-6 -left-6 bg-white rounded-xl shadow p-4 w-48">
+          <div class="text-xs text-slate-500">Next Event</div>
+          <div class="font-semibold">Web Accessibility 101</div>
+          <div class="text-xs text-slate-500">Fri, 6 PM</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-2xl font-extrabold mb-6">Featured Categories</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <a href="courses.html" class="bg-white rounded-xl p-6 shadow hover:shadow-xl transition">
+          <div class="font-semibold">Computer Science</div>
+          <p class="text-sm text-slate-600 mt-1">Systems • Networks • AI</p>
+        </a>
+        <a href="courses.html" class="bg-white rounded-xl p-6 shadow hover:shadow-xl transition">
+          <div class="font-semibold">Business</div>
+          <p class="text-sm text-slate-600 mt-1">Marketing • Finance • Ops</p>
+        </a>
+        <a href="courses.html" class="bg-white rounded-xl p-6 shadow hover:shadow-xl transition">
+          <div class="font-semibold">Design</div>
+          <p class="text-sm text-slate-600 mt-1">UX • UI • Product</p>
+        </a>
+        <a href="courses.html" class="bg-white rounded-xl p-6 shadow hover:shadow-xl transition">
+          <div class="font-semibold">Humanities</div>
+          <p class="text-sm text-slate-600 mt-1">Literature • History</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="border-t py-8 text-center text-sm text-slate-500">© 2025 Edustudy</footer>
+  <script>feather.replace();</script>
+</body>
+</html>
