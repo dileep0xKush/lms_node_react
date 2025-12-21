@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Offline Classes | LMS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { primary: '#6d28d9', soft: '#f3f4f6', cream:'#faf7f2' } } } };
+  </script>
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="bg-cream text-slate-800">
+  <header class="sticky top-0 z-50 bg-cream/90 backdrop-blur border-b">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-2 font-extrabold text-primary text-xl">
+        <div class="w-9 h-9 rounded-lg bg-primary text-white flex items-center justify-center">Si</div>
+      </a>
+      <nav class="hidden md:flex gap-8 text-sm font-medium">
+        <a href="index.html" class="hover:text-primary">Home</a>
+        <a href="courses.html" class="hover:text-primary">Courses</a>
+        <a href="about.html" class="hover:text-primary">Mentors</a>
+        <a href="payments.html" class="hover:text-primary">Payments</a>
+      </nav>
+      <div class="flex gap-3">
+        <a href="dashboard-student.html" class="px-4 py-2 text-sm rounded-lg border">Dashboard</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-10 space-y-8">
+    <div class="flex items-center justify-between">
+      <h1 class="text-3xl font-extrabold">Offline Classroom Courses</h1>
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2 border rounded-lg px-3 py-2 bg-white">
+          <i data-feather="map-pin" class="w-4"></i>
+          <select class="outline-none text-sm"><option>All Locations</option><option>Bangalore</option><option>Hyderabad</option></select>
+        </div>
+        <div class="flex items-center gap-2 border rounded-lg px-3 py-2 bg-white">
+          <i data-feather="calendar" class="w-4"></i>
+          <input type="date" class="outline-none text-sm"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-white rounded-2xl shadow p-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="font-bold">Fullstack Bootcamp</h2>
+            <p class="text-sm text-slate-600">Location: Bangalore • Starts: Jan 8</p>
+            <p class="text-sm text-slate-600">Instructor: <span class="font-semibold">Andrew Williams</span></p>
+          </div>
+          <a href="course.html" class="px-4 py-2 rounded bg-primary text-white">Details</a>
+        </div>
+        <div class="mt-4 text-sm text-slate-600">Schedule: Mon, Wed, Fri • 6 PM - 8 PM</div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow p-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="font-bold">Data Science Primer</h2>
+            <p class="text-sm text-slate-600">Location: Hyderabad • Starts: Jan 15</p>
+            <p class="text-sm text-slate-600">Instructor: <span class="font-semibold">Cristian Doru Barin</span></p>
+          </div>
+          <a href="course.html" class="px-4 py-2 rounded bg-primary text-white">Details</a>
+        </div>
+        <div class="mt-4 text-sm text-slate-600">Schedule: Sat • 10 AM - 1 PM</div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="mt-10 border-t py-8 text-center text-sm text-slate-500">© 2025 LMS</footer>
+  <script>feather.replace();</script>
+</body>
+</html>

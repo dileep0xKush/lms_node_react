@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Course Detail | LMS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { primary: '#6d28d9', soft: '#f3f4f6', cream:'#faf7f2' } } } };
+  </script>
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="bg-cream text-slate-800">
+  <header class="sticky top-0 z-50 bg-cream/90 backdrop-blur border-b">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-2 font-extrabold text-primary text-xl">
+        <div class="w-9 h-9 rounded-lg bg-primary text-white flex items-center justify-center">Si</div>
+      </a>
+      <nav class="hidden md:flex gap-8 text-sm font-medium">
+        <a href="index.html" class="hover:text-primary">Home</a>
+        <a href="courses.html" class="text-primary font-semibold">Courses</a>
+        <a href="about.html" class="hover:text-primary">Mentors</a>
+        <a href="index.html#get-in-touch" class="hover:text-primary">Contact</a>
+        <a href="payments.html" class="hover:text-primary">Payments</a>
+      </nav>
+      <div class="flex gap-3">
+        <a href="dashboard-student.html" class="px-4 py-2 text-sm rounded-lg border">Dashboard</a>
+        <a href="payments.html" class="px-4 py-2 text-sm rounded-lg bg-primary text-white shadow">Enroll</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="bg-white border-b">
+      <div class="max-w-7xl mx-auto px-6 py-10 grid lg:grid-cols-3 gap-10">
+        <div class="lg:col-span-2">
+          <h1 class="text-3xl font-extrabold">React + Redux Toolkit</h1>
+          <p class="mt-2 text-slate-600">Build modern SPAs with state-of-the-art patterns and tooling.</p>
+          <div class="mt-4 flex items-center gap-4 text-sm text-slate-600">
+            <span>⭐ 4.8 (2,432)</span>
+            <span>• 24 lessons</span>
+            <span>• 12h content</span>
+            <span>• Certificate</span>
+          </div>
+        </div>
+        <div class="bg-soft rounded-2xl p-6 h-max">
+          <div class="text-3xl font-extrabold text-green-600">$99</div>
+          <a href="lesson.html" class="mt-4 block w-full text-center px-6 py-3 rounded-lg bg-primary text-white font-semibold">Start Learning</a>
+          <a href="payments.html" class="mt-3 block w-full text-center px-6 py-3 rounded-lg border">Buy Now</a>
+          <ul class="mt-4 text-sm text-slate-600 space-y-1">
+            <li>Lifetime access</li>
+            <li>Downloadable resources</li>
+            <li>Certificate of completion</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tabs -->
+    <section class="max-w-7xl mx-auto px-6 py-10 grid lg:grid-cols-3 gap-10">
+      <div class="lg:col-span-2 space-y-8">
+        <!-- Syllabus -->
+        <div class="bg-white rounded-2xl shadow p-6">
+          <h2 class="text-xl font-bold mb-4">Syllabus</h2>
+          <div class="divide-y">
+            <details class="py-3 group" open>
+              <summary class="flex items-center justify-between cursor-pointer">
+                <div class="font-semibold">Module 1: React Fundamentals</div>
+                <i data-feather="chevron-down" class="w-4 transition group-open:rotate-180"></i>
+              </summary>
+              <ul class="mt-3 pl-4 text-sm text-slate-600 space-y-2">
+                <li class="flex items-center justify-between"><span>Lesson 1: JSX & Components</span><a href="lesson.html" class="text-primary">Preview</a></li>
+                <li>Lesson 2: Props & State</li>
+                <li>Lesson 3: Effects</li>
+              </ul>
+            </details>
+            <details class="py-3 group">
+              <summary class="flex items-center justify-between cursor-pointer">
+                <div class="font-semibold">Module 2: Advanced Patterns</div>
+                <i data-feather="chevron-down" class="w-4 transition group-open:rotate-180"></i>
+              </summary>
+              <ul class="mt-3 pl-4 text-sm text-slate-600 space-y-2">
+                <li>Lesson 1: Context</li>
+                <li>Lesson 2: Performance</li>
+                <li>Lesson 3: Testing</li>
+              </ul>
+            </details>
+          </div>
+        </div>
+
+        <!-- Resources -->
+        <div class="bg-white rounded-2xl shadow p-6">
+          <h2 class="text-xl font-bold mb-4">Resources</h2>
+          <ul class="text-sm text-slate-600 space-y-3">
+            <li class="flex items-center gap-2"><i data-feather="download" class="w-4"></i> Slides: React Patterns.pdf</li>
+            <li class="flex items-center gap-2"><i data-feather="download" class="w-4"></i> Starter Project.zip</li>
+            <li class="flex items-center gap-2"><i data-feather="external-link" class="w-4"></i> Docs: redux-toolkit.js.org</li>
+          </ul>
+        </div>
+
+        <!-- Assessments -->
+        <div class="bg-white rounded-2xl shadow p-6">
+          <h2 class="text-xl font-bold mb-4">Quizzes & Assignments</h2>
+          <div class="space-y-3 text-sm">
+            <div class="flex items-center justify-between p-3 rounded-lg bg-soft"><span>Quiz 1: React Basics</span><button class="px-3 py-1 rounded bg-primary text-white">Start</button></div>
+            <div class="flex items-center justify-between p-3 rounded-lg bg-soft"><span>Assignment: Build a Todo App</span><button class="px-3 py-1 rounded border">View</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Details -->
+      <aside class="space-y-6">
+        <div class="bg-white rounded-2xl shadow p-6">
+          <h3 class="font-bold mb-3">Instructor</h3>
+          <div class="flex items-center gap-3">
+            <img class="w-12 h-12 rounded-full" src="https://randomuser.me/api/portraits/men/45.jpg"/>
+            <div>
+              <div class="font-semibold">Shoo Thar Mein</div>
+              <div class="text-xs text-slate-500">Senior UX Designer</div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow p-6">
+          <h3 class="font-bold mb-3">Certification</h3>
+          <p class="text-sm text-slate-600">Earn a shareable certificate after completion.</p>
+          <img class="mt-3 rounded-lg" src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b"/>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="mt-10 border-t py-8 text-center text-sm text-slate-500">© 2025 LMS</footer>
+  <script>feather.replace();</script>
+</body>
+</html>

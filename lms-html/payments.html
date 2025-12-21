@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payments | LMS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { primary: '#6d28d9', soft: '#f3f4f6', cream:'#faf7f2' } } } };
+  </script>
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="bg-cream text-slate-800">
+  <header class="sticky top-0 z-50 bg-cream/90 backdrop-blur border-b">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-2 font-extrabold text-primary text-xl">
+        <div class="w-9 h-9 rounded-lg bg-primary text-white flex items-center justify-center">Si</div>
+      </a>
+      <nav class="hidden md:flex gap-8 text-sm font-medium">
+        <a href="index.html" class="hover:text-primary">Home</a>
+        <a href="courses.html" class="hover:text-primary">Courses</a>
+        <a href="offline.html" class="hover:text-primary">Offline</a>
+      </nav>
+      <div class="flex gap-3">
+        <a href="dashboard-student.html" class="px-4 py-2 text-sm rounded-lg border">Dashboard</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-6 py-10 space-y-6">
+    <h1 class="text-2xl font-extrabold">Secure Checkout</h1>
+    <div class="bg-white rounded-2xl shadow grid md:grid-cols-2">
+      <div class="p-6 border-r">
+        <h2 class="font-bold mb-4">Billing Details</h2>
+        <div class="space-y-3 text-sm">
+          <input class="w-full border rounded-lg px-3 py-2" placeholder="Full name" />
+          <input class="w-full border rounded-lg px-3 py-2" placeholder="Email" />
+          <input class="w-full border rounded-lg px-3 py-2" placeholder="Address" />
+        </div>
+        <h2 class="font-bold mt-6 mb-2">Payment</h2>
+        <div class="space-y-3 text-sm">
+          <input class="w-full border rounded-lg px-3 py-2" placeholder="Card number" />
+          <div class="grid grid-cols-2 gap-3">
+            <input class="w-full border rounded-lg px-3 py-2" placeholder="MM/YY" />
+            <input class="w-full border rounded-lg px-3 py-2" placeholder="CVC" />
+          </div>
+        </div>
+        <button class="mt-6 w-full px-4 py-3 rounded bg-primary text-white">Pay $99</button>
+        <p class="mt-3 text-xs text-slate-500">For demo only. Do not enter real card data.</p>
+      </div>
+      <div class="p-6">
+        <h2 class="font-bold mb-4">Order Summary</h2>
+        <div class="flex items-center gap-4">
+          <img class="w-20 h-14 rounded object-cover" src="https://images.unsplash.com/photo-1633356122544-f134324a6cee"/>
+          <div>
+            <p class="font-semibold">React + Redux Toolkit</p>
+            <p class="text-xs text-slate-500">24 lessons • Certificate</p>
+          </div>
+        </div>
+        <div class="mt-4 text-sm space-y-2">
+          <div class="flex justify-between"><span>Price</span><span>$99</span></div>
+          <div class="flex justify-between"><span>Tax</span><span>$0</span></div>
+          <div class="flex justify-between font-semibold"><span>Total</span><span>$99</span></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="mt-10 border-t py-8 text-center text-sm text-slate-500">© 2025 LMS</footer>
+  <script>feather.replace();</script>
+</body>
+</html>

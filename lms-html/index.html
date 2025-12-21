@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LMS Landing</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/index.css" />
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#faf7f2",
+              primary: "#6d28d9",
+              soft: "#f3f4f6",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+
+  <body class="bg-cream text-slate-800 antialiased">
+    <!-- ================= NAVBAR ================= -->
+    <header class="sticky top-0 z-50 bg-cream/90 backdrop-blur border-b">
+      <div
+        class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <div
+          class="flex items-center gap-2 font-extrabold text-primary text-xl"
+        >
+          <div
+            class="w-9 h-9 rounded-lg bg-primary text-white flex items-center justify-center"
+          >
+            Si
+          </div>
+        </div>
+
+        <nav class="hidden md:flex gap-8 text-sm font-medium">
+          <a href="index.html" class="hover:text-primary">Home</a>
+          <a href="courses.html" class="hover:text-primary">Courses</a>
+          <a href="about.html" class="hover:text-primary">Mentors</a>
+          <a href="#get-in-touch" class="hover:text-primary">Contact</a>
+          <a href="payments.html" class="hover:text-primary">Payments</a>
+        </nav>
+
+        <div class="flex gap-3">
+          <button class="px-4 py-2 text-sm rounded-lg border">Sign In</button>
+          <button
+            class="px-4 py-2 text-sm rounded-lg bg-primary text-white shadow"
+          >
+            Sign Up
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ================= HERO ================= -->
+    <section
+      class="relative overflow-hidden bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-600"
+    >
+      <div class="absolute inset-0 bg-black/20"></div>
+
+      <div class="relative max-w-7xl mx-auto px-6 py-28 text-white">
+        <div class="max-w-3xl">
+          <span
+            class="inline-block mb-4 px-4 py-1 rounded-full bg-white/20 text-sm"
+          >
+            🚀 Learn from Industry Mentors
+          </span>
+
+          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
+            Advance your <br />engineering career
+          </h1>
+
+          <p class="mt-6 text-lg text-white/90">
+            Job-ready courses, live mentorship, real projects and
+            certifications.
+          </p>
+
+          <div class="mt-10 flex flex-col sm:flex-row gap-4">
+            <button
+              class="px-8 py-4 rounded-xl bg-white text-purple-700 font-semibold shadow-lg"
+            >
+              Browse Courses
+            </button>
+            <button class="px-8 py-4 rounded-xl border border-white/40">
+              Become a Mentor
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HERO ================= -->
+    <section class="pt-24 pb-32">
+      <div class="max-w-7xl mx-auto px-6 text-center">
+        <h1
+          class="text-4xl md:text-5xl font-extrabold leading-tight animate-fade"
+        >
+          Advance your engineering <br class="hidden md:block" />
+          skills with our courses
+        </h1>
+
+        <p class="mt-4 text-slate-500 max-w-xl mx-auto">
+          Build skills with our courses and mentor from world-class companies.
+        </p>
+
+        <div class="mt-6 flex justify-center items-center gap-3 text-sm">
+          <div class="flex -space-x-2">
+            <img
+              class="w-8 h-8 rounded-full border"
+              src="https://randomuser.me/api/portraits/men/32.jpg"
+            />
+            <img
+              class="w-8 h-8 rounded-full border"
+              src="https://randomuser.me/api/portraits/women/44.jpg"
+            />
+            <img
+              class="w-8 h-8 rounded-full border"
+              src="https://randomuser.me/api/portraits/men/12.jpg"
+            />
+          </div>
+          <span class="font-semibold">4.6 ★★★★★</span>
+          <span class="text-slate-400">Rated by 25k</span>
+        </div>
+
+        <!-- Search Box -->
+        <div
+          class="mt-12 bg-white rounded-xl shadow-xl p-4 flex flex-col md:flex-row gap-4 max-w-4xl mx-auto"
+        >
+          <div
+            class="flex items-center gap-3 flex-1 border rounded-lg px-4 py-3"
+          >
+            <i data-feather="layers" class="w-4 text-slate-400"></i>
+            <select class="w-full outline-none text-sm">
+              <option>Mobile Development</option>
+              <option>Web Development</option>
+              <option>Data Science</option>
+            </select>
+          </div>
+
+          <div
+            class="flex items-center gap-3 flex-1 border rounded-lg px-4 py-3"
+          >
+            <i data-feather="clock" class="w-4 text-slate-400"></i>
+            <select class="w-full outline-none text-sm">
+              <option>20hrs in a Month</option>
+              <option>10hrs in a Month</option>
+            </select>
+          </div>
+
+          <button
+            class="px-8 py-3 rounded-lg bg-primary text-white font-semibold hover:scale-105 transition"
+          >
+            Start
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TRUST ================= -->
+    <!-- ================= TRUSTED BY (MARQUEE SLIDER) ================= -->
+    <section class="py-28 bg-white overflow-hidden">
+      <div class="max-w-7xl mx-auto px-6">
+        <p class="text-center text-slate-400 text-lg mb-20">
+          Trusted by companies of all sizes
+        </p>
+
+        <!-- Marquee -->
+        <div class="relative w-full overflow-hidden">
+          <div class="flex items-center gap-28 w-max marquee-track">
+            <!-- Logos -->
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_Bélo.svg"
+              class="h-9 opacity-80 hover:opacity-100 transition"
+            />
+
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_Bélo.svg"
+              class="h-9 opacity-80 hover:opacity-100 transition"
+            />
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_Bélo.svg"
+              class="h-9 opacity-80 hover:opacity-100 transition"
+            />
+
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/2/2f/HubSpot_Logo.svg"
+              class="h-9 opacity-80 hover:opacity-100 transition"
+            />
+
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"
+              class="h-9 opacity-80 hover:opacity-100 transition"
+            />
+
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
+              class="h-9 opacity-80 hover:opacity-100 transition"
+            />
+
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/7/7a/FedEx_Express.svg"
+              class="h-9 opacity-80 hover:opacity-100 transition"
+            />
+
+            <!-- Duplicate for seamless loop -->
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_Bélo.svg"
+              class="h-9 opacity-80 hover:opacity-100 transition"
+            />
+
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/2/2f/HubSpot_Logo.svg"
+              class="h-9 opacity-80 hover:opacity-100 transition"
+            />
+
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"
+              class="h-9 opacity-80 hover:opacity-100 transition"
+            />
+
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
+              class="h-9 opacity-80 hover:opacity-100 transition"
+            />
+
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/7/7a/FedEx_Express.svg"
+              class="h-9 opacity-80 hover:opacity-100 transition"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= COURSES ================= -->
+    <section class="py-24">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex justify-between items-center mb-10">
+          <h2 class="text-3xl font-extrabold">Popular Courses</h2>
+          <a href="courses.html" class="border px-4 py-2 rounded-lg text-sm">
+            Explore Classes
+          </a>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Card -->
+          <div
+            class="bg-white rounded-xl shadow hover:shadow-2xl transition hover:-translate-y-1"
+          >
+            <img
+              class="h-40 w-full object-cover rounded-t-xl"
+              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
+            />
+            <div class="p-5">
+              <h3 class="font-bold">HTML, CSS & JavaScript</h3>
+              <p class="text-sm text-slate-500 mt-1">Web Development</p>
+              <div class="mt-4 flex justify-between items-center">
+                <span class="font-bold text-green-600">$40</span>
+                <span class="text-sm">⭐ 4.5</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-xl shadow hover:shadow-2xl transition hover:-translate-y-1"
+          >
+            <img
+              class="h-40 w-full object-cover rounded-t-xl"
+              src="https://images.unsplash.com/photo-1555949963-aa79dcee981c"
+            />
+            <div class="p-5">
+              <h3 class="font-bold">Node.js & Express</h3>
+              <p class="text-sm text-slate-500 mt-1">Backend</p>
+              <div class="mt-4 flex justify-between">
+                <span class="font-bold text-green-600">$21</span>
+                <span class="text-sm">⭐ 4.5</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-xl shadow hover:shadow-2xl transition hover:-translate-y-1"
+          >
+            <img
+              class="h-40 w-full object-cover rounded-t-xl"
+              src="https://images.unsplash.com/photo-1587620962725-abab7fe55159"
+            />
+            <div class="p-5">
+              <h3 class="font-bold">MongoDB Mastery</h3>
+              <p class="text-sm text-slate-500 mt-1">Database</p>
+              <div class="mt-4 flex justify-between">
+                <span class="font-bold text-green-600">$21</span>
+                <span class="text-sm">⭐ 4.5</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-xl shadow hover:shadow-2xl transition hover:-translate-y-1"
+          >
+            <img
+              class="h-40 w-full object-cover rounded-t-xl"
+              src="https://images.unsplash.com/photo-1633356122544-f134324a6cee"
+            />
+            <div class="p-5">
+              <h3 class="font-bold">React + Redux Toolkit</h3>
+              <p class="text-sm text-slate-500 mt-1">Frontend</p>
+              <div class="mt-4 flex justify-between">
+                <span class="font-bold text-green-600">$99</span>
+                <span class="text-sm">⭐ 4.5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STUDENT REVIEWS ================= -->
+    <section class="bg-[#faf6ef] py-28 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-6">
+        <!-- Header -->
+        <div
+          class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-20"
+        >
+          <div>
+            <h2 class="text-4xl font-extrabold leading-tight">
+              What Our Happy <br />
+              Students Says
+            </h2>
+            <p class="mt-4 text-slate-600 max-w-md">
+              Build skills with our courses and mentor from world-class
+              companies.
+            </p>
+          </div>
+
+          <button
+            class="self-start md:self-auto px-6 py-3 border border-purple-600 text-purple-600 rounded-lg hover:bg-purple-600 hover:text-white transition"
+          >
+            Give Your Review
+          </button>
+        </div>
+
+        <!-- Slider -->
+        <div
+          class="relative overflow-x-auto no-scrollbar cursor-grab"
+          id="reviewSlider"
+        >
+          <div
+            class="flex gap-10 w-max animate-review-scroll hover:[animation-play-state:paused]"
+          >
+            <!-- Card -->
+            <div class="bg-white rounded-2xl p-8 w-[340px] shadow">
+              <div class="flex justify-center mb-4">
+                <img
+                  src="https://randomuser.me/api/portraits/men/32.jpg"
+                  class="w-20 h-20 rounded-full"
+                />
+              </div>
+              <p class="text-sm text-slate-500 text-center">UX/UI Designer</p>
+              <h3 class="text-xl font-bold text-center mt-1">
+                Andrew Williams
+              </h3>
+
+              <div class="flex justify-center mt-3 text-yellow-400">★★★★★</div>
+
+              <p class="mt-6 text-slate-600 text-center leading-relaxed">
+                I have been a Junior Graphic Designer for more then 10 years.
+                Some things are problem that I had and teach how to solve them.
+                That's why this course is so great!
+              </p>
+            </div>
+
+            <!-- Card -->
+            <div class="bg-white rounded-2xl p-8 w-[340px] shadow">
+              <div class="flex justify-center mb-4">
+                <img
+                  src="https://randomuser.me/api/portraits/women/44.jpg"
+                  class="w-20 h-20 rounded-full"
+                />
+              </div>
+              <p class="text-sm text-slate-500 text-center">UX/UI Designer</p>
+              <h3 class="text-xl font-bold text-center mt-1">
+                Cristian Doru Barin
+              </h3>
+
+              <div class="flex justify-center mt-3 text-yellow-400">★★★★★</div>
+
+              <p class="mt-6 text-slate-600 text-center leading-relaxed">
+                I have been a Junior Graphic Designer for more then 10 years.
+                Some things are problem that I had and teach how to solve them.
+                That's why this course is so great!
+              </p>
+            </div>
+
+            <!-- Card -->
+            <div class="bg-white rounded-2xl p-8 w-[340px] shadow">
+              <div class="flex justify-center mb-4">
+                <img
+                  src="https://randomuser.me/api/portraits/men/76.jpg"
+                  class="w-20 h-20 rounded-full"
+                />
+              </div>
+              <p class="text-sm text-slate-500 text-center">UX/UI Designer</p>
+              <h3 class="text-xl font-bold text-center mt-1">
+                Tanzeel Ur Rehman
+              </h3>
+
+              <div class="flex justify-center mt-3 text-yellow-400">★★★★★</div>
+
+              <p class="mt-6 text-slate-600 text-center leading-relaxed">
+                I have been a Junior Graphic Designer for more then 10 years.
+                Some things are problem that I had and teach how to solve them.
+                That's why this course is so great!
+              </p>
+            </div>
+
+            <!-- Duplicate cards for infinite loop -->
+            <div class="bg-white rounded-2xl p-8 w-[340px] shadow">
+              <div class="flex justify-center mb-4">
+                <img
+                  src="https://randomuser.me/api/portraits/men/32.jpg"
+                  class="w-20 h-20 rounded-full"
+                />
+              </div>
+              <p class="text-sm text-slate-500 text-center">UX/UI Designer</p>
+              <h3 class="text-xl font-bold text-center mt-1">
+                Andrew Williams
+              </h3>
+              <div class="flex justify-center mt-3 text-yellow-400">★★★★★</div>
+              <p class="mt-6 text-slate-600 text-center leading-relaxed">
+                I have been a Junior Graphic Designer for more then 10 years.
+                Some things are problem that I had and teach how to solve them.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= MENTORS ================= -->
+    <section class="py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex justify-between items-center mb-12">
+          <h2 class="text-3xl font-extrabold">Meet with our Mentors</h2>
+          <button class="border px-4 py-2 rounded-lg text-sm">
+            Explore Mentors
+          </button>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            class="bg-soft p-6 rounded-xl text-center hover:shadow-xl transition"
+          >
+            <img
+              class="w-24 h-24 mx-auto rounded-full object-cover"
+              src="https://randomuser.me/api/portraits/men/45.jpg"
+            />
+            <h3 class="mt-4 font-bold">Shoo Thar Mein</h3>
+            <p class="text-sm text-slate-500">Senior UX Designer</p>
+          </div>
+
+          <div
+            class="bg-soft p-6 rounded-xl text-center hover:shadow-xl transition"
+          >
+            <img
+              class="w-24 h-24 mx-auto rounded-full object-cover"
+              src="https://randomuser.me/api/portraits/men/34.jpg"
+            />
+            <h3 class="mt-4 font-bold">Cristian Doru Barin</h3>
+            <p class="text-sm text-slate-500">Photoshop Instructor</p>
+          </div>
+
+          <div
+            class="bg-soft p-6 rounded-xl text-center hover:shadow-xl transition"
+          >
+            <img
+              class="w-24 h-24 mx-auto rounded-full object-cover"
+              src="https://randomuser.me/api/portraits/men/76.jpg"
+            />
+            <h3 class="mt-4 font-bold">Tanzeel Ur Rehman</h3>
+            <p class="text-sm text-slate-500">SEO Expert</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= GET IN TOUCH ================= -->
+    <section id="get-in-touch" class="bg-white py-28">
+      <div class="max-w-7xl mx-auto px-6">
+        <!-- Heading -->
+        <h2 class="text-4xl font-extrabold mb-14">Get in Touch</h2>
+
+        <!-- Form -->
+        <form class="space-y-10 max-w-6xl">
+          <!-- Row 1 -->
+          <div class="grid md:grid-cols-2 gap-8">
+            <div>
+              <label class="block mb-3 text-sm font-medium"> First Name </label>
+              <input
+                type="text"
+                placeholder="John"
+                class="w-full rounded-full border border-slate-200 px-6 py-4 text-slate-600 focus:outline-none focus:border-purple-500"
+              />
+            </div>
+
+            <div>
+              <label class="block mb-3 text-sm font-medium"> Last Name </label>
+              <input
+                type="text"
+                placeholder="Doe"
+                class="w-full rounded-full border border-slate-200 px-6 py-4 text-slate-600 focus:outline-none focus:border-purple-500"
+              />
+            </div>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="grid md:grid-cols-2 gap-8">
+            <div>
+              <label class="block mb-3 text-sm font-medium">
+                Email address
+              </label>
+              <input
+                type="email"
+                placeholder="john.doe@example.com"
+                class="w-full rounded-full border border-slate-200 px-6 py-4 text-slate-600 focus:outline-none focus:border-purple-500"
+              />
+            </div>
+
+            <div>
+              <label class="block mb-3 text-sm font-medium">
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                placeholder="+1234567890"
+                class="w-full rounded-full border border-slate-200 px-6 py-4 text-slate-600 focus:outline-none focus:border-purple-500"
+              />
+            </div>
+          </div>
+
+          <!-- Message -->
+          <div>
+            <label class="block mb-3 text-sm font-medium"> Message </label>
+            <textarea
+              rows="4"
+              placeholder="Anything else you wanna communicate"
+              class="w-full rounded-2xl border border-slate-200 px-6 py-4 text-slate-600 resize-none focus:outline-none focus:border-purple-500"
+            ></textarea>
+          </div>
+
+          <!-- Submit -->
+          <button
+            type="submit"
+            class="px-12 py-4 rounded-full bg-slate-200 text-slate-500 font-semibold cursor-not-allowed"
+            disabled
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <!-- ================= NEWSLETTER BANNER ================= -->
+    <!-- ================= NEWSLETTER ================= -->
+    <section class="bg-purple-700 pt-28">
+      <div class="max-w-7xl mx-auto px-6">
+        <!-- Newsletter Card -->
+        <div
+          class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#ffd59c] to-[#ffcb8a] grid lg:grid-cols-2 items-center"
+        >
+          <!-- Left Content -->
+          <div class="p-12 lg:p-16">
+            <h2 class="text-4xl font-extrabold mb-4">Join Our Newsletter</h2>
+            <p class="text-slate-700 mb-10 max-w-md">
+              Subscribe our newsletter for discounts, promo and many more.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 max-w-md">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                class="flex-1 px-6 py-4 rounded-lg outline-none"
+              />
+              <button
+                class="px-8 py-4 rounded-lg bg-purple-700 text-white font-semibold hover:bg-purple-800 transition"
+              >
+                Subscribe
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Image -->
+          <div class="relative hidden lg:block h-full">
+            <img
+              src="https://images.unsplash.com/photo-1503602642458-232111445657"
+              class="absolute inset-0 w-full h-full object-cover"
+            />
+
+            <!-- Ribbon -->
+            <div
+              class="absolute top-0 right-12 bg-[#ff7f5c] text-white px-6 py-5 rounded-b-2xl text-center shadow-lg"
+            >
+              <p class="text-3xl font-extrabold leading-tight">FREE</p>
+              <p class="text-sm mt-1">FOR NEW<br />USERS</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="bg-purple-700 text-purple-100 pt-24 pb-16">
+      <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12">
+        <!-- Brand -->
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <div
+              class="w-10 h-10 bg-purple-500 rounded-lg flex items-center justify-center font-bold text-white"
+            >
+              Si
+            </div>
+          </div>
+          <p class="text-purple-200 leading-relaxed">
+            Level up your skills, and get dream job with passion.
+          </p>
+
+          <!-- Social -->
+          <div class="flex gap-4 mt-6 text-purple-300">
+            <span>🌐</span>
+            <span>🐦</span>
+            <span>📸</span>
+            <span>▶️</span>
+          </div>
+        </div>
+
+        <!-- Company -->
+        <div>
+          <h4 class="font-semibold text-lg mb-4">Company</h4>
+          <ul class="space-y-3 text-purple-200">
+            <li>Home</li>
+            <li>Courses</li>
+            <li>Mentors</li>
+            <li>Testimonial</li>
+            <li>Join</li>
+          </ul>
+        </div>
+
+        <!-- Support -->
+        <div>
+          <h4 class="font-semibold text-lg mb-4">Support</h4>
+          <ul class="space-y-3 text-purple-200">
+            <li>Help center</li>
+            <li>Terms of service</li>
+            <li>Legal</li>
+            <li>Privacy policy</li>
+            <li>Status</li>
+          </ul>
+        </div>
+
+        <!-- Stay Updated -->
+        <div>
+          <h4 class="font-semibold text-lg mb-4">Stay up to date</h4>
+          <div
+            class="flex items-center bg-purple-600 rounded-lg overflow-hidden"
+          >
+            <input
+              type="email"
+              placeholder="Your email address"
+              class="flex-1 bg-transparent px-4 py-3 outline-none text-white placeholder-purple-300"
+            />
+            <button class="px-4 text-white text-xl">➤</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom -->
+      <div class="text-center text-purple-300 text-sm mt-16">
+        © 2025 – All Rights Reserved
+      </div>
+    </footer>
+
+    <script>
+      feather.replace();
+    </script>
+  </body>
+</html>

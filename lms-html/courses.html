@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Courses | LMS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { primary: '#6d28d9', soft: '#f3f4f6', cream:'#faf7f2' } } } };
+  </script>
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="bg-cream text-slate-800">
+  <header class="sticky top-0 z-50 bg-cream/90 backdrop-blur border-b">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-2 font-extrabold text-primary text-xl">
+        <div class="w-9 h-9 rounded-lg bg-primary text-white flex items-center justify-center">Si</div>
+      </a>
+      <nav class="hidden md:flex gap-8 text-sm font-medium">
+        <a href="index.html" class="hover:text-primary">Home</a>
+        <a href="courses.html" class="text-primary font-semibold">Courses</a>
+        <a href="about.html" class="hover:text-primary">Mentors</a>
+        <a href="index.html#get-in-touch" class="hover:text-primary">Contact</a>
+        <a href="payments.html" class="hover:text-primary">Payments</a>
+      </nav>
+      <div class="flex gap-3">
+        <a href="dashboard-student.html" class="px-4 py-2 text-sm rounded-lg border">Dashboard</a>
+        <a href="payments.html" class="px-4 py-2 text-sm rounded-lg bg-primary text-white shadow">Enroll</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="py-10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Filters -->
+        <aside class="lg:w-72 bg-white rounded-2xl shadow p-5 h-max">
+          <h2 class="text-lg font-bold mb-4">Filters</h2>
+          <div class="space-y-6 text-sm">
+            <div>
+              <p class="font-semibold mb-2">Category</p>
+              <div class="space-y-2">
+                <label class="flex items-center gap-2"><input type="checkbox"/> Web Development</label>
+                <label class="flex items-center gap-2"><input type="checkbox"/> Mobile</label>
+                <label class="flex items-center gap-2"><input type="checkbox"/> Data</label>
+              </div>
+            </div>
+            <div>
+              <p class="font-semibold mb-2">Skills</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 rounded-full bg-soft">HTML</span>
+                <span class="px-3 py-1 rounded-full bg-soft">CSS</span>
+                <span class="px-3 py-1 rounded-full bg-soft">React</span>
+                <span class="px-3 py-1 rounded-full bg-soft">Node</span>
+              </div>
+            </div>
+            <div>
+              <p class="font-semibold mb-2">Topics</p>
+              <select class="w-full border rounded-lg px-3 py-2">
+                <option>All</option>
+                <option>Frontend</option>
+                <option>Backend</option>
+                <option>Database</option>
+              </select>
+            </div>
+            <div>
+              <p class="font-semibold mb-2">Chapters</p>
+              <input type="range" min="1" max="50" class="w-full" />
+            </div>
+          </div>
+        </aside>
+
+        <!-- Listing -->
+        <section class="flex-1">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <h1 class="text-2xl md:text-3xl font-extrabold">Browse Courses</h1>
+            <div class="flex gap-3">
+              <div class="flex items-center gap-2 border rounded-lg px-3 py-2 bg-white">
+                <i data-feather="search" class="w-4"></i>
+                <input placeholder="Search courses" class="outline-none text-sm" />
+              </div>
+              <select class="border rounded-lg px-3 py-2 bg-white text-sm">
+                <option>Most Popular</option>
+                <option>Top Rated</option>
+                <option>Newest</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Repeatable course card -->
+            <a href="course.html" class="bg-white rounded-xl shadow hover:shadow-2xl transition hover:-translate-y-1 block">
+              <img class="h-40 w-full object-cover rounded-t-xl" src="https://images.unsplash.com/photo-1633356122544-f134324a6cee"/>
+              <div class="p-5">
+                <p class="text-xs text-slate-500">Frontend • 24 lessons</p>
+                <h3 class="font-bold mt-1">React + Redux Toolkit</h3>
+                <div class="mt-3 text-sm flex justify-between">
+                  <span class="text-green-600 font-semibold">$99</span>
+                  <span>⭐ 4.8</span>
+                </div>
+              </div>
+            </a>
+
+            <a href="course.html" class="bg-white rounded-xl shadow hover:shadow-2xl transition hover:-translate-y-1 block">
+              <img class="h-40 w-full object-cover rounded-t-xl" src="https://images.unsplash.com/photo-1555949963-aa79dcee981c"/>
+              <div class="p-5">
+                <p class="text-xs text-slate-500">Backend • 30 lessons</p>
+                <h3 class="font-bold mt-1">Node.js & Express</h3>
+                <div class="mt-3 text-sm flex justify-between">
+                  <span class="text-green-600 font-semibold">$79</span>
+                  <span>⭐ 4.7</span>
+                </div>
+              </div>
+            </a>
+
+            <a href="course.html" class="bg-white rounded-xl shadow hover:shadow-2xl transition hover:-translate-y-1 block">
+              <img class="h-40 w-full object-cover rounded-t-xl" src="https://images.unsplash.com/photo-1587620962725-abab7fe55159"/>
+              <div class="p-5">
+                <p class="text-xs text-slate-500">Database • 18 lessons</p>
+                <h3 class="font-bold mt-1">MongoDB Mastery</h3>
+                <div class="mt-3 text-sm flex justify-between">
+                  <span class="text-green-600 font-semibold">$59</span>
+                  <span>⭐ 4.6</span>
+                </div>
+              </div>
+            </a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="mt-16 border-t py-8 text-center text-sm text-slate-500">© 2025 LMS</footer>
+
+  <script>feather.replace();</script>
+</body>
+</html>
