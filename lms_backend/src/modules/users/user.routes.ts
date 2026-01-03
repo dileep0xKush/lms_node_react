@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { userController } from "./users.controller";
+import { create, findOne } from "./users.controller";
 
 const router = Router();
 
-// POST /api/users
-router.post("/", userController);
+router.post("/", create);
+
+router.get("/:id", findOne);
 
 export default router;
