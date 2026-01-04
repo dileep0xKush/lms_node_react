@@ -11,7 +11,9 @@
     // See also https://aka.ms/tsconfig/module
     "module": "CommonJS",
     "target": "esnext",
-    "types": [],
+    "typeRoots": ["./src/types", "./node_modules/@types"],
+    "types": ["node", "express"],
+
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],
