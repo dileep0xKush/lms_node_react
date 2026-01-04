@@ -1,27 +1,52 @@
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import PublicLayout from "../../layouts/PublicLayout";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { loginApi } from "../../services/authService";
+import { useToast } from "../../components/toast/useToast";
+import { FiEye, FiEyeOff } from "react-icons/fi";
+
 export default function Login() {
+  const navigate = useNavigate();
+  const { showToast } = useToast();
+
   useEffect(() => {
     document.title = "Login — LMS Admin";
   }, []);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPass, setShowPass] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async () => {
+    try {
+      setLoading(true);
+
+      const res = await loginApi(email, password);
+      sessionStorage.setItem("user", JSON.stringify(res.user));
+
+      showToast("Login successful 🎉", "success");
+      navigate("/dashboard");
+    } catch (err) {
+      const message =
+        err instanceof Error ? err.message : "Login failed. Please try again.";
+      showToast(message, "error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <PublicLayout>
       <div className="relative w-full min-h-screen flex items-center justify-center">
-        {/* Full-screen Background Image */}
         <div
           className="fixed inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: "url('/app_bg_image.avif')",
-          }}
+          style={{ backgroundImage: "url('/app_bg_image.avif')" }}
         />
-
-        {/* Overlay */}
         <div className="fixed inset-0 bg-black/60" />
 
-        {/* Auth Card */}
         <div className="relative bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/40 p-6 sm:p-8 w-[95%] max-w-md">
           <div className="text-center mb-4">
             <h2 className="text-2xl font-extrabold tracking-wide">
@@ -31,10 +56,34 @@ export default function Login() {
           </div>
 
           <div className="space-y-4">
-            <Input label="Email" type="email" />
-            <Input label="Password" type="password" />
+            <Input
+              label="Email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
-            <Button className="w-full mt-1">Sign In</Button>
+            <Input
+              label="Password"
+              type={showPass ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              rightIcon={
+                showPass ? (
+                  <FiEyeOff onClick={() => setShowPass(false)} />
+                ) : (
+                  <FiEye onClick={() => setShowPass(true)} />
+                )
+              }
+            />
+
+            <Button
+              className="w-full mt-1"
+              disabled={loading}
+              onClick={handleLogin}
+            >
+              {loading ? "Signing in..." : "Sign In"}
+            </Button>
 
             <div className="flex justify-between text-sm pt-2 text-gray-600">
               <Link to="/forgot" className="hover:text-blue-600">

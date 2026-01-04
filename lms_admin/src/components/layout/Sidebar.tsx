@@ -20,7 +20,7 @@ export default function Sidebar() {
       <nav className="mt-4 px-3 space-y-1">
         {/* Dashboard */}
         <NavLink
-          to="/"
+          to="/dashboard"
           className={({ isActive }) =>
             `${linkBase}
              group hover:bg-gray-800/60 hover:text-white
@@ -52,26 +52,6 @@ export default function Sidebar() {
           />
           <FiUsers className="text-lg" />
           Users
-        </NavLink>
-
-        {/* Courses */}
-        <NavLink
-          to="/courses"
-          className={({ isActive }) =>
-            `${linkBase}
-             group hover:bg-gray-800/60 hover:text-white
-             ${isActive ? "bg-gray-800 text-white shadow-inner" : ""}`
-          }
-        >
-          <span
-            className={`w-1.5 h-6 rounded-full ${
-              location.pathname === "/courses"
-                ? "bg-blue-500"
-                : "bg-transparent"
-            }`}
-          />
-          <FiBookOpen className="text-lg" />
-          Courses
         </NavLink>
       </nav>
 
