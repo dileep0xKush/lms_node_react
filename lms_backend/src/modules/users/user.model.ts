@@ -12,7 +12,6 @@ const UserSchema = new Schema<IUser>(
       index: true,
     },
     password: { type: String, required: true, select: false },
-    role: { type: String, enum: ["user", "admin"], default: "user" },
     isActive: { type: Boolean, default: true },
     resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date },

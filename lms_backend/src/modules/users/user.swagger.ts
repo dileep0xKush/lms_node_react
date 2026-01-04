@@ -21,10 +21,6 @@
  *         email:
  *           type: string
  *           example: john@example.com
- *         role:
- *           type: string
- *           enum: [user, admin]
- *           example: user
  *         isActive:
  *           type: boolean
  *           example: true
@@ -51,6 +47,29 @@
  *         password:
  *           type: string
  *           example: Pass@123
+ *         roleId:
+ *           type: string
+ *           description: Role to assign (stored in pivot table)
+ *           example: 66b2d44a29f81ab9e3c91234
+ *
+ *     UpdateUserDto:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           example: John Wick
+ *         email:
+ *           type: string
+ *           example: wick@example.com
+ *
+ *     UpdateUserStatusDto:
+ *       type: object
+ *       required:
+ *         - isActive
+ *       properties:
+ *         isActive:
+ *           type: boolean
+ *           example: false
  */
 
 /**
@@ -78,9 +97,33 @@
  *                 message:
  *                   type: string
  *                 data:
- *                   $ref: '#/components/schemas/User'
+ *                   type: object
+ *                   properties:
+ *                     user:
+ *                       $ref: '#/components/schemas/User'
  *       400:
  *         description: Bad request
+ *
+ *   get:
+ *     summary: Get all users
+ *     tags: [Users]
+ *     responses:
+ *       200:
+ *         description: Users fetched successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     users:
+ *                       type: array
+ *                       items:
+ *                         $ref: '#/components/schemas/User'
  */
 
 /**
@@ -95,7 +138,6 @@
  *         required: true
  *         schema:
  *           type: string
- *         description: User ID
  *     responses:
  *       200:
  *         description: User fetched successfully
@@ -107,9 +149,65 @@
  *                 success:
  *                   type: boolean
  *                 data:
- *                   $ref: '#/components/schemas/User'
- *       400:
- *         description: Invalid user id
+ *                   type: object
+ *                   properties:
+ *                     user:
+ *                       $ref: '#/components/schemas/User'
  *       404:
  *         description: User not found
+ *
+ *   put:
+ *     summary: Update user
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/UpdateUserDto'
+ *     responses:
+ *       200:
+ *         description: User updated successfully
+ *
+ *   delete:
+ *     summary: Delete user
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: User deleted successfully
+ */
+
+/**
+ * @swagger
+ * /users/{id}/status:
+ *   patch:
+ *     summary: Update user status (activate/deactivate)
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/UpdateUserStatusDto'
+ *     responses:
+ *       200:
+ *         description: User status updated
  */

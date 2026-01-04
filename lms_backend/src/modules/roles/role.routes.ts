@@ -1,12 +1,5 @@
 import { Router } from "express";
-import {
-  create,
-  findOne,
-  findAll,
-  update,
-  destory,
-  updateStatus,
-} from "./users.controller";
+import { create, findAll, findOne, update, remove } from "./role.controller";
 
 const router = Router();
 
@@ -14,7 +7,6 @@ router.post("/", create);
 router.get("/", findAll);
 router.get("/:id", findOne);
 router.put("/:id", update);
-router.delete("/:id", destory);
-router.patch("/:id/status", updateStatus);
+router.delete("/:id", remove);
 
 export default router;
