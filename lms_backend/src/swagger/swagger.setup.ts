@@ -2,7 +2,7 @@ import { Express, Request } from "express";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
 
-const swaggerOptions: swaggerJsdoc.Options = {
+export const swaggerOptions: swaggerJsdoc.Options = {
   definition: {
     openapi: "3.0.0",
     info: {
@@ -20,6 +20,7 @@ const swaggerOptions: swaggerJsdoc.Options = {
   // Load swagger docs from modules
   apis: [
     "src/modules/**/*.routes.ts",
+    "src/modules/**/*.controller.ts",
     "src/modules/**/*.dto.ts",
     "src/modules/**/*.swagger.ts",
   ],
@@ -49,7 +50,7 @@ const swaggerUiOptions = {
 
 export function setupSwagger(app: Express) {
   if (process.env.NODE_ENV === "production") {
-    console.log("⚠️ Swagger disabled in production");
+    console.log("Swagger disabled in production");
     return;
   }
 
@@ -59,5 +60,5 @@ export function setupSwagger(app: Express) {
     swaggerUi.setup(swaggerSpec, swaggerUiOptions)
   );
 
-  console.log("📘 Swagger available at http://localhost:3000/api/docs");
+  console.log("Swagger available at http://localhost:3000/api/docs");
 }

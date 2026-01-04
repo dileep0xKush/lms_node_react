@@ -12,7 +12,7 @@ import {
 const JWT_SECRET = process.env.JWT_SECRET || "secret";
 
 export const AuthService = {
-  async register(dto: RegisterDTO) {
+  async register(dto: RegisterDTO): Promise<string> {
     const existing = await UserModel.findOne({ email: dto.email });
     if (existing) {
       throw new Error("Email already exists");
@@ -29,7 +29,7 @@ export const AuthService = {
     return this.generateToken(user.id);
   },
 
-  async login(dto: LoginDTO) {
+  async login(dto: LoginDTO): Promise<string> {
     const user = await UserModel.findOne({ email: dto.email }).select(
       "+password"
     );
@@ -46,7 +46,7 @@ export const AuthService = {
     return this.generateToken(user.id);
   },
 
-  async forgotPassword(dto: ForgotPasswordDTO) {
+  async forgotPassword(dto: ForgotPasswordDTO): Promise<string> {
     const user = await UserModel.findOne({ email: dto.email });
 
     if (!user) {
@@ -63,7 +63,7 @@ export const AuthService = {
     return token;
   },
 
-  async resetPassword(dto: ResetPasswordDTO) {
+  async resetPassword(dto: ResetPasswordDTO): Promise<boolean> {
     const user = await UserModel.findOne({
       resetPasswordToken: dto.token,
       resetPasswordExpires: { $gt: new Date() },
@@ -83,7 +83,11 @@ export const AuthService = {
     return true;
   },
 
-  generateToken(id: string) {
+  async getUserById(id: string) {
+    return UserModel.findById(id).select("-password");
+  },
+
+  generateToken(id: string): string {
     return jwt.sign({ id }, JWT_SECRET, { expiresIn: "7d" });
   },
 };

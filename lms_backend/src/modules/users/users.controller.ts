@@ -16,18 +16,16 @@ export const create = asyncHandler(async (req: Request, res: Response) => {
 
     logger.info("User created successfully", { userId: user.id });
 
-    return res.status(201).json({
-      success: true,
-      message: "User created successfully",
-      data: user,
-    });
-
+    return res.success({ user }, "User created successfully", 201);
   } catch (err) {
     logger.error("Create user failed", {
       error: err instanceof Error ? err.message : err,
       body: req.body,
     });
-    throw err; // let global handler respond
+
+    return res.error("User creation failed", 400, {
+      reason: err instanceof Error ? err.message : "Unexpected error",
+    });
   }
 });
 
@@ -45,16 +43,15 @@ export const findOne = asyncHandler(async (req: Request, res: Response) => {
 
     logger.info("User fetched successfully", { userId: id });
 
-    return res.json({
-      success: true,
-      data: user,
-    });
-
+    return res.success({ user }, "User fetched successfully", 200);
   } catch (err) {
     logger.error("Find user failed", {
       error: err instanceof Error ? err.message : err,
       params: req.params,
     });
-    throw err;
+
+    return res.error("Failed to fetch user", 400, {
+      reason: err instanceof Error ? err.message : "Unexpected error",
+    });
   }
 });

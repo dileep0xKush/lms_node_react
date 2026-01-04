@@ -170,3 +170,22 @@
  *       400:
  *         description: Invalid or expired token
  */
+
+/**
+ * @swagger
+ * /auth/me:
+ *   get:
+ *     summary: Get authenticated user (via cookie token)
+ *     tags: [Auth]
+ *     description: Returns the logged-in user by validating the JWT stored in the auth cookie.
+ *     responses:
+ *       200:
+ *         description: Authenticated user details
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/MeResponse'
+ *       401:
+ *         description: Not authenticated or invalid token
+ */
+
