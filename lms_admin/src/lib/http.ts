@@ -35,8 +35,11 @@ async function request<
 
 export const http = {
   get: <TResponse>(url: string) => request<TResponse>("GET", url),
-  post: <TResponse, TBody extends JsonValue>(url: string, body: TBody) =>
-    request<TResponse, TBody>("POST", url, body),
+  post: <TResponse, TBody extends JsonValue | undefined = undefined>(
+    url: string,
+    body?: TBody
+  ) => request<TResponse, TBody>("POST", url, body),
+
   put: <TResponse, TBody extends JsonValue>(url: string, body: TBody) =>
     request<TResponse, TBody>("PUT", url, body),
   patch: <TResponse, TBody extends JsonValue>(url: string, body: TBody) =>

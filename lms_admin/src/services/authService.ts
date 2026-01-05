@@ -6,3 +6,13 @@ export function loginApi(email: string, password: string) {
     { email: string; password: string }
   >("/auth/login", { email, password });
 }
+
+export function logoutApi() {
+  return http.post<null>("/auth/logout");
+}
+
+export function meApi() {
+  return http.get<{ user: { id: string; name: string; email: string } }>(
+    "/auth/me"
+  );
+}

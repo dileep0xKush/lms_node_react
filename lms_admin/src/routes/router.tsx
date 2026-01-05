@@ -1,14 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import Login from "./pages/auth/Login";
-import Register from "./pages/auth/Register";
-import ForgotPassword from "./pages/auth/ForgotPassword";
+import Login from "../pages/auth/Login";
+import Register from "../pages/auth/Register";
+import ForgotPassword from "../pages/auth/ForgotPassword";
 
-import AuthLayout from "./layouts/AuthLayout";
-import Dashboard from "./pages/dashboard/Dashboard";
+import AuthLayout from "../layouts/AuthLayout";
+import Dashboard from "../pages/dashboard/Dashboard";
 
-import ErrorPage from "./pages/system/ErrorPage";
-import Users from "./pages/users/Users";
+import ErrorPage from "../pages/system/ErrorPage";
+import Users from "../pages/users/Users";
 
 export const router = createBrowserRouter([
   {
@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [{ index: true, element: <Dashboard /> }],
   },
-   {
+  {
     path: "/users",
     element: <AuthLayout />,
     errorElement: <ErrorPage />,

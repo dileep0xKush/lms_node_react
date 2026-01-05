@@ -6,10 +6,12 @@ import Button from "../../components/Button";
 import { loginApi } from "../../services/authService";
 import { useToast } from "../../components/toast/useToast";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { useLoader } from "../../context/LoaderContext";
 
 export default function Login() {
   const navigate = useNavigate();
   const { showToast } = useToast();
+  const { showLoader, hideLoader } = useLoader();
 
   useEffect(() => {
     document.title = "Login — LMS Admin";
@@ -18,23 +20,22 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
     try {
-      setLoading(true);
+      showLoader();
 
       const res = await loginApi(email, password);
       sessionStorage.setItem("user", JSON.stringify(res.user));
 
-      showToast("Login successful 🎉", "success");
+      showToast("Login successful", "success");
       navigate("/dashboard");
     } catch (err) {
       const message =
         err instanceof Error ? err.message : "Login failed. Please try again.";
       showToast(message, "error");
     } finally {
-      setLoading(false);
+      hideLoader(); // 🔹 global loader OFF
     }
   };
 
@@ -77,12 +78,8 @@ export default function Login() {
               }
             />
 
-            <Button
-              className="w-full mt-1"
-              disabled={loading}
-              onClick={handleLogin}
-            >
-              {loading ? "Signing in..." : "Sign In"}
+            <Button className="w-full mt-1" onClick={handleLogin}>
+              Sign In
             </Button>
 
             <div className="flex justify-between text-sm pt-2 text-gray-600">

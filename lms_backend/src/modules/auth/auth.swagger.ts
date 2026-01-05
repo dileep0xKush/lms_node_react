@@ -173,6 +173,28 @@
 
 /**
  * @swagger
+ * /auth/logout:
+ *   post:
+ *     summary: Logout user (clears auth cookie)
+ *     tags: [Auth]
+ *     description: Removes the authentication cookie and ends the user session.
+ *     responses:
+ *       200:
+ *         description: Logged out successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Logged out
+ *       401:
+ *         description: User is not authenticated
+ */
+
+/**
+ * @swagger
  * /auth/me:
  *   get:
  *     summary: Get authenticated user (via cookie token)
@@ -188,4 +210,3 @@
  *       401:
  *         description: Not authenticated or invalid token
  */
-
