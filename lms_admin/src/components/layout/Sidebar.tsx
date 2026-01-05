@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { FiHome, FiUsers, FiBookOpen } from "react-icons/fi";
+import { FiHome, FiUsers } from "react-icons/fi";
 
 export default function Sidebar() {
   const linkBase =

@@ -3,15 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import PublicLayout from "../../layouts/PublicLayout";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import { loginApi } from "../../services/authService";
 import { useToast } from "../../components/toast/useToast";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useLoader } from "../../context/LoaderContext";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Login() {
   const navigate = useNavigate();
   const { showToast } = useToast();
   const { showLoader, hideLoader } = useLoader();
+  const { login } = useAuth(); // <-- use AuthProvider login
 
   useEffect(() => {
     document.title = "Login — LMS Admin";
@@ -25,22 +26,22 @@ export default function Login() {
     try {
       showLoader();
 
-      const res = await loginApi(email, password);
-      sessionStorage.setItem("user", JSON.stringify(res.user));
+      await login(email, password); // <-- updates global auth state
 
       showToast("Login successful", "success");
-      navigate("/dashboard");
+      navigate("/dashboard", { replace: true });
     } catch (err) {
       const message =
         err instanceof Error ? err.message : "Login failed. Please try again.";
       showToast(message, "error");
     } finally {
-      hideLoader(); // 🔹 global loader OFF
+      hideLoader();
     }
   };
 
   return (
     <PublicLayout>
+      {/* UI unchanged */}
       <div className="relative w-full min-h-screen flex items-center justify-center">
         <div
           className="fixed inset-0 bg-cover bg-center bg-no-repeat"

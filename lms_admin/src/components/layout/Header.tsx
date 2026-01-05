@@ -7,9 +7,9 @@ import {
   FiMenu,
 } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-import { logoutApi } from "../../services/authService";
 import { useToast } from "../toast/useToast";
 import { useLoader } from "../../context/LoaderContext";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
   const [openProfile, setOpenProfile] = useState(false);
@@ -21,6 +21,7 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
   const navigate = useNavigate();
   const { showToast } = useToast();
   const { showLoader, hideLoader } = useLoader();
+  const { logout, user } = useAuth();
 
   const notifications = [
     { id: 1, text: "New user registered", time: "2m ago" },
@@ -32,11 +33,10 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
     try {
       showLoader();
 
-      await logoutApi();
-      sessionStorage.removeItem("user");
+      await logout();
 
       showToast("Logged out successfully", "success");
-      navigate("/");
+      navigate("/", { replace: true });
     } catch (err) {
       const message = err instanceof Error ? err.message : "Logout failed";
       showToast(message, "error");
@@ -147,8 +147,8 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
           {openProfile && (
             <div className="absolute right-0 mt-3 w-48 bg-white border border-gray-200 rounded-2xl shadow-xl overflow-hidden">
               <div className="px-4 py-3 border-b">
-                <p className="text-sm font-semibold">John Doe</p>
-                <p className="text-xs text-gray-500">Admin</p>
+                <p className="text-sm font-semibold">{user?.name}</p>
+                <p className="text-xs text-gray-500">{user?.email}</p>
               </div>
 
               <ul className="text-sm">
@@ -159,7 +159,6 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
                   Settings
                 </li>
 
-                {/* 🔹 Logout */}
                 <li
                   className="px-4 py-2 text-red-500 hover:bg-red-50 cursor-pointer"
                   onClick={handleLogout}

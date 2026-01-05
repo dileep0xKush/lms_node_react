@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, CookieOptions } from "express";
 import jwt from "jsonwebtoken";
 import { AuthService } from "./auth.service";
 import { asyncHandler } from "../../common/utils/async-handler";
@@ -6,9 +6,9 @@ import { asyncHandler } from "../../common/utils/async-handler";
 const JWT_SECRET = process.env.JWT_SECRET || "secret";
 const COOKIE_NAME = "auth_token";
 
-const cookieOptions = {
+const cookieOptions: CookieOptions = {
   httpOnly: true,
-  sameSite: "strict" as const,
+  sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
   secure: process.env.NODE_ENV === "production",
   path: "/",
   maxAge: 7 * 24 * 60 * 60 * 1000,
