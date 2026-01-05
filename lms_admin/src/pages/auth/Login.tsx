@@ -7,26 +7,39 @@ import { useToast } from "../../components/toast/useToast";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useLoader } from "../../context/LoaderContext";
 import { useAuth } from "../../context/AuthContext";
+import { validators } from "../../utils/validation";
+import { useFormValidator } from "../../hooks/useFormValidator";
 
 export default function Login() {
   const navigate = useNavigate();
   const { showToast } = useToast();
   const { showLoader, hideLoader } = useLoader();
-  const { login } = useAuth(); // <-- use AuthProvider login
+  const { login } = useAuth();
 
   useEffect(() => {
     document.title = "Login — LMS Admin";
   }, []);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
 
+  const { values, errors, handleChange, validateForm } = useFormValidator(
+    {
+      email: "",
+      password: "",
+    },
+    {
+      email: [validators.email],
+      password: [validators.min(6)],
+    }
+  );
+
   const handleLogin = async () => {
+    if (!validateForm()) return;
+
     try {
       showLoader();
 
-      await login(email, password); // <-- updates global auth state
+      await login(values.email, values.password);
 
       showToast("Login successful", "success");
       navigate("/dashboard", { replace: true });
@@ -41,7 +54,6 @@ export default function Login() {
 
   return (
     <PublicLayout>
-      {/* UI unchanged */}
       <div className="relative w-full min-h-screen flex items-center justify-center">
         <div
           className="fixed inset-0 bg-cover bg-center bg-no-repeat"
@@ -61,15 +73,17 @@ export default function Login() {
             <Input
               label="Email"
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={values.email}
+              onChange={handleChange("email")}
+              error={errors.email}
             />
 
             <Input
               label="Password"
               type={showPass ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={values.password}
+              onChange={handleChange("password")}
+              error={errors.password}
               rightIcon={
                 showPass ? (
                   <FiEyeOff onClick={() => setShowPass(false)} />

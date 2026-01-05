@@ -15,3 +15,20 @@ export function logoutApi() {
 export function meApi() {
   return http.get<MeResponse>("/auth/me");
 }
+
+export function forgotPasswordApi(email: string) {
+  return http.post<{ message: string }, { email: string }>(
+    "/auth/forgot-password",
+    { email }
+  );
+}
+
+export function resetPasswordApi(token: string, password: string) {
+  return http.post<{ message: string }, { token: string; password: string }>(
+    "/auth/reset-password",
+    {
+      token,
+      password,
+    }
+  );
+}

@@ -12,27 +12,25 @@ import ErrorPage from "../pages/system/ErrorPage";
 import Users from "../pages/users/Users";
 import PublicRoute from "../components/auth/PublicRoute";
 import PrivateRoute from "../components/auth/PrivateRoute";
+import UpdatePassword from "../pages/auth/UpdatePassword";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <PublicRoute />,
-
     ...(isProd && { errorElement: <ErrorPage /> }),
-
     children: [
       { index: true, element: <Login /> },
       { path: "register", element: <Register /> },
       { path: "forgot", element: <ForgotPassword /> },
+      { path: "reset-password", element: <UpdatePassword /> },
     ],
   },
 
   {
     path: "/",
     element: <PrivateRoute />,
-
     ...(isProd && { errorElement: <ErrorPage /> }),
-
     children: [
       {
         path: "dashboard",
@@ -47,8 +45,5 @@ export const router = createBrowserRouter([
     ],
   },
 
-  {
-    path: "*",
-    element: <ErrorPage />,
-  },
+  ...(isProd ? [{ path: "*", element: <ErrorPage /> }] : []),
 ]);

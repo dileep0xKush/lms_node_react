@@ -70,8 +70,6 @@ export const resetPassword = asyncHandler(
   }
 );
 
-// ---------- AUTH COOKIE USER -----------
-
 export const me = asyncHandler(async (req: Request, res: Response) => {
   const token = req.cookies?.[COOKIE_NAME];
 

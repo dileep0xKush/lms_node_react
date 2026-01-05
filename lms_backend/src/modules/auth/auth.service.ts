@@ -8,7 +8,7 @@ import {
   ForgotPasswordDTO,
   ResetPasswordDTO,
 } from "./auth.interface";
-
+import { mailService } from "../../common/mail/mail.service";
 const JWT_SECRET = process.env.JWT_SECRET || "secret";
 
 export const AuthService = {
@@ -59,6 +59,13 @@ export const AuthService = {
     user.resetPasswordExpires = new Date(Date.now() + 15 * 60 * 1000);
 
     await user.save();
+
+    const resetUrl = `${process.env.CLIENT_URL}/reset-password?token=${token}`;
+
+    if (!user.email) {
+      throw new Error("User email is missing");
+    }
+    await mailService.sendPasswordResetEmail(user.email, resetUrl);
 
     return token;
   },
