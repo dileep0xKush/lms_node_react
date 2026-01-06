@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export default function InvoicePage() {
   return (
@@ -6,10 +6,7 @@ export default function InvoicePage() {
       <div className="max-w-4xl mx-auto px-6">
         {/* Actions */}
         <div className="flex justify-between items-center mb-6">
-          <Link
-            to="/dashboard"
-            className="text-sm text-purple-700 hover:underline"
-          >
+          <Link to="/dashboard" className="text-sm text-purple-700 hover:underline">
             ← Back to dashboard
           </Link>
 
@@ -30,9 +27,7 @@ export default function InvoicePage() {
                 <div className="h-10 w-10 rounded-lg bg-purple-700 text-white flex items-center justify-center font-bold">
                   LMS
                 </div>
-                <span className="text-lg font-semibold text-slate-900">
-                  Skillify LMS
-                </span>
+                <span className="text-lg font-semibold text-slate-900">Skillify LMS</span>
               </div>
 
               <p className="text-sm text-slate-500">
@@ -42,12 +37,8 @@ export default function InvoicePage() {
             </div>
 
             <div className="text-right">
-              <h1 className="text-3xl font-extrabold text-slate-900">
-                Invoice
-              </h1>
-              <p className="text-sm text-slate-500 mt-1">
-                Invoice #INV-2025-001
-              </p>
+              <h1 className="text-3xl font-extrabold text-slate-900">Invoice</h1>
+              <p className="text-sm text-slate-500 mt-1">Invoice #INV-2025-001</p>
               <p className="text-sm text-slate-500">Date: 21 Dec 2025</p>
             </div>
           </div>
@@ -55,9 +46,7 @@ export default function InvoicePage() {
           {/* Billing Info */}
           <div className="grid md:grid-cols-2 gap-8 mt-8">
             <div>
-              <h4 className="text-sm font-semibold text-slate-700 mb-2">
-                Billed To
-              </h4>
+              <h4 className="text-sm font-semibold text-slate-700 mb-2">Billed To</h4>
               <p className="text-sm text-slate-600">
                 John Doe <br />
                 john.doe@email.com <br />
@@ -66,9 +55,7 @@ export default function InvoicePage() {
             </div>
 
             <div>
-              <h4 className="text-sm font-semibold text-slate-700 mb-2">
-                Payment Details
-              </h4>
+              <h4 className="text-sm font-semibold text-slate-700 mb-2">Payment Details</h4>
               <p className="text-sm text-slate-600">
                 Payment Method: Credit Card <br />
                 Transaction ID: TXN123456789 <br />
@@ -91,9 +78,7 @@ export default function InvoicePage() {
 
               <tbody>
                 <tr className="border-b">
-                  <td className="p-3">
-                    React + Redux Toolkit – Build Scalable Apps
-                  </td>
+                  <td className="p-3">React + Redux Toolkit – Build Scalable Apps</td>
                   <td className="p-3 text-center">1</td>
                   <td className="p-3 text-right">$99.00</td>
                   <td className="p-3 text-right">$99.00</td>

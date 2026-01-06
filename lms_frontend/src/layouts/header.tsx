@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink } from 'react-router-dom';
 
 export function Header() {
   return (
@@ -10,9 +10,7 @@ export function Header() {
             <div className="h-9 w-19 rounded-lg bg-purple-700 text-white flex items-center justify-center font-bold">
               LMS
             </div>
-            <span className="text-lg font-semibold text-slate-900">
-              Skillify
-            </span>
+            <span className="text-lg font-semibold text-slate-900">Skillify</span>
           </Link>
         </div>
 
@@ -20,45 +18,35 @@ export function Header() {
         <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-slate-600">
           <NavLink
             to="/courses"
-            className={({ isActive }) =>
-              isActive ? "text-purple-700" : "hover:text-purple-700"
-            }
+            className={({ isActive }) => (isActive ? 'text-purple-700' : 'hover:text-purple-700')}
           >
             Courses
           </NavLink>
 
           <NavLink
             to="/paths"
-            className={({ isActive }) =>
-              isActive ? "text-purple-700" : "hover:text-purple-700"
-            }
+            className={({ isActive }) => (isActive ? 'text-purple-700' : 'hover:text-purple-700')}
           >
             Learning Paths
           </NavLink>
 
           <NavLink
             to="/mentors"
-            className={({ isActive }) =>
-              isActive ? "text-purple-700" : "hover:text-purple-700"
-            }
+            className={({ isActive }) => (isActive ? 'text-purple-700' : 'hover:text-purple-700')}
           >
             Mentors
           </NavLink>
 
           <NavLink
             to="/pricing"
-            className={({ isActive }) =>
-              isActive ? "text-purple-700" : "hover:text-purple-700"
-            }
+            className={({ isActive }) => (isActive ? 'text-purple-700' : 'hover:text-purple-700')}
           >
             Pricing
           </NavLink>
 
           <NavLink
             to="/community"
-            className={({ isActive }) =>
-              isActive ? "text-purple-700" : "hover:text-purple-700"
-            }
+            className={({ isActive }) => (isActive ? 'text-purple-700' : 'hover:text-purple-700')}
           >
             Community
           </NavLink>
@@ -66,7 +54,6 @@ export function Header() {
 
         {/* RIGHT: Actions */}
         <div className="flex items-center gap-4 flex-1 justify-end">
-
           <Link
             to="/login"
             className="px-6 py-2 rounded-lg border border-slate-300 text-sm font-medium hover:bg-slate-100 transition"

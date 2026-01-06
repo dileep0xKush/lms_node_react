@@ -1,32 +1,31 @@
-import { useEffect } from "react";
-import PublicLayout from "../../layouts/PublicLayout";
-import Input from "../../components/Input";
-import Button from "../../components/Button";
-import { validators } from "../../utils/validation";
-import { useFormValidator } from "../../hooks/useFormValidator";
+import { useEffect } from 'react';
+import PublicLayout from '../../layouts/PublicLayout';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+import { validators } from '../../utils/validation';
+import { useFormValidator } from '../../hooks/useFormValidator';
 
 export default function Register() {
   useEffect(() => {
-    document.title = "Register — LMS Admin";
+    document.title = 'Register — LMS Admin';
   }, []);
 
-  // 👇 central reusable form state + validation
   const { values, errors, handleChange, validateForm } = useFormValidator(
     {
-      name: "",
-      email: "",
-      password: "",
+      name: '',
+      email: '',
+      password: '',
     },
     {
       name: [validators.min(3)],
       email: [validators.email],
       password: [validators.min(6)],
-    }
+    },
   );
 
   const handleRegister = () => {
     if (!validateForm()) return;
-    console.log("Form valid — submit", values);
+    console.log('Form valid — submit', values);
   };
 
   return (
@@ -40,19 +39,15 @@ export default function Register() {
 
         <div className="relative bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/40 p-6 sm:p-8 w-[95%] max-w-md">
           <div className="text-center mb-4">
-            <h2 className="text-2xl font-extrabold tracking-wide">
-              Create Account
-            </h2>
-            <p className="text-gray-500 text-sm">
-              Join the LMS admin dashboard
-            </p>
+            <h2 className="text-2xl font-extrabold tracking-wide">Create Account</h2>
+            <p className="text-gray-500 text-sm">Join the LMS admin dashboard</p>
           </div>
 
           <div className="space-y-4">
             <Input
               label="Full Name"
               value={values.name}
-              onChange={handleChange("name")}
+              onChange={handleChange('name')}
               error={errors.name}
             />
 
@@ -60,7 +55,7 @@ export default function Register() {
               label="Email"
               type="email"
               value={values.email}
-              onChange={handleChange("email")}
+              onChange={handleChange('email')}
               error={errors.email}
             />
 
@@ -68,7 +63,7 @@ export default function Register() {
               label="Password"
               type="password"
               value={values.password}
-              onChange={handleChange("password")}
+              onChange={handleChange('password')}
               error={errors.password}
             />
 

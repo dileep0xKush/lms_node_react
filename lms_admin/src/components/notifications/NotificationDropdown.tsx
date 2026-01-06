@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import { FiBell, FiClock } from "react-icons/fi";
+import { useState, useRef, useEffect } from 'react';
+import { FiBell, FiClock } from 'react-icons/fi';
 
 type Notification = {
   id: number;
@@ -22,8 +22,8 @@ export default function NotificationDropdown({ notifications }: Props) {
         setOpen(false);
       }
     };
-    document.addEventListener("mousedown", handle);
-    return () => document.removeEventListener("mousedown", handle);
+    document.addEventListener('mousedown', handle);
+    return () => document.removeEventListener('mousedown', handle);
   }, []);
 
   return (
@@ -40,9 +40,7 @@ export default function NotificationDropdown({ notifications }: Props) {
         <div className="absolute right-0 mt-3 w-80 bg-white border border-gray-200 rounded-2xl shadow-xl overflow-hidden animate-fade-in">
           <div className="px-4 py-3 border-b flex justify-between items-center bg-gray-50/70">
             <span className="font-semibold text-sm">Notifications</span>
-            <button className="text-xs text-blue-600 hover:underline">
-              Mark all read
-            </button>
+            <button className="text-xs text-blue-600 hover:underline">Mark all read</button>
           </div>
 
           <ul className="max-h-72 overflow-y-auto">

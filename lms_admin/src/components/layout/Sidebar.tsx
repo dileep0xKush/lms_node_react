@@ -1,9 +1,9 @@
-import { NavLink } from "react-router-dom";
-import { FiHome, FiUsers } from "react-icons/fi";
+import { NavLink } from 'react-router-dom';
+import { FiHome, FiUsers } from 'react-icons/fi';
 
 export default function Sidebar() {
   const linkBase =
-    "flex items-center gap-3 px-4 py-2 rounded-xl font-medium transition-all duration-300";
+    'flex items-center gap-3 px-4 py-2 rounded-xl font-medium transition-all duration-300';
 
   return (
     <aside className="w-64 bg-gradient-to-b from-gray-900 to-gray-950 text-gray-300 flex flex-col shadow-xl border-r border-gray-800">
@@ -24,12 +24,12 @@ export default function Sidebar() {
           className={({ isActive }) =>
             `${linkBase}
              group hover:bg-gray-800/60 hover:text-white
-             ${isActive ? "bg-gray-800 text-white shadow-inner" : ""}`
+             ${isActive ? 'bg-gray-800 text-white shadow-inner' : ''}`
           }
         >
           <span
             className={`w-1.5 h-6 rounded-full ${
-              location.pathname === "/" ? "bg-blue-500" : "bg-transparent"
+              location.pathname === '/' ? 'bg-blue-500' : 'bg-transparent'
             }`}
           />
           <FiHome className="text-lg" />
@@ -42,12 +42,12 @@ export default function Sidebar() {
           className={({ isActive }) =>
             `${linkBase}
              group hover:bg-gray-800/60 hover:text-white
-             ${isActive ? "bg-gray-800 text-white shadow-inner" : ""}`
+             ${isActive ? 'bg-gray-800 text-white shadow-inner' : ''}`
           }
         >
           <span
             className={`w-1.5 h-6 rounded-full ${
-              location.pathname === "/users" ? "bg-blue-500" : "bg-transparent"
+              location.pathname === '/users' ? 'bg-blue-500' : 'bg-transparent'
             }`}
           />
           <FiUsers className="text-lg" />

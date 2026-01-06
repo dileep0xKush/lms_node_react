@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export default function UpdatePasswordPage() {
   return (
@@ -22,8 +22,7 @@ export default function UpdatePasswordPage() {
             </h1>
 
             <p className="mt-6 text-white/90 max-w-md">
-              Your new password should be strong and unique to keep your
-              account protected.
+              Your new password should be strong and unique to keep your account protected.
             </p>
           </div>
 
@@ -43,14 +42,10 @@ export default function UpdatePasswordPage() {
             <div className="h-10 w-10 rounded-lg bg-purple-700 text-white flex items-center justify-center font-bold">
               LMS
             </div>
-            <span className="text-lg font-semibold text-slate-900">
-              Skillify
-            </span>
+            <span className="text-lg font-semibold text-slate-900">Skillify</span>
           </div>
 
-          <h2 className="text-2xl font-extrabold text-slate-900">
-            Update password
-          </h2>
+          <h2 className="text-2xl font-extrabold text-slate-900">Update password</h2>
           <p className="text-slate-500 text-sm mt-2 mb-8">
             Enter and confirm your new password below.
           </p>
@@ -70,9 +65,7 @@ export default function UpdatePasswordPage() {
             />
 
             {/* Password hint */}
-            <p className="text-xs text-slate-500">
-              Must be at least 8 characters long.
-            </p>
+            <p className="text-xs text-slate-500">Must be at least 8 characters long.</p>
 
             <button
               type="submit"
@@ -84,10 +77,7 @@ export default function UpdatePasswordPage() {
 
           {/* Links */}
           <div className="mt-6 text-sm text-center">
-            <Link
-              to="/login"
-              className="text-purple-700 font-medium hover:underline"
-            >
+            <Link to="/login" className="text-purple-700 font-medium hover:underline">
               Back to login
             </Link>
           </div>

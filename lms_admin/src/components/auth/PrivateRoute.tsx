@@ -1,6 +1,6 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
-import GlobalLoader from "../GlobalLoader";
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import GlobalLoader from '../GlobalLoader';
 
 export default function PrivateRoute() {
   const { user, isLoading } = useAuth();

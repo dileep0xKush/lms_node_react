@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from "react";
-import type { ReactNode } from "react";
+import { createContext, useContext, useState } from 'react';
+import type { ReactNode } from 'react';
 
 type LoaderContextType = {
   loading: boolean;
@@ -30,7 +30,7 @@ export function LoaderProvider({ children }: LoaderProviderProps) {
 export function useLoader(): LoaderContextType {
   const context = useContext(LoaderContext);
   if (!context) {
-    throw new Error("useLoader must be used inside LoaderProvider");
+    throw new Error('useLoader must be used inside LoaderProvider');
   }
   return context;
 }

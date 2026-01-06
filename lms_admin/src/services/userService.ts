@@ -1,4 +1,4 @@
-import { http } from "../lib/http";
+import { http } from '../lib/http';
 
 export type ApiUser = {
   _id: string;
@@ -17,5 +17,5 @@ export type GetUsersApiResult = {
 };
 
 export function getUsersApi() {
-  return http.get<GetUsersApiResult>("/users");
+  return http.get<GetUsersApiResult>('/users');
 }

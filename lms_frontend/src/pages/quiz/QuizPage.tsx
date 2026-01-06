@@ -1,28 +1,28 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const questions = [
   {
     id: 1,
-    question: "What does HTML stand for?",
+    question: 'What does HTML stand for?',
     options: [
-      "Hyper Text Markup Language",
-      "High Text Machine Language",
-      "Hyperlinks and Text Markup Language",
-      "Home Tool Markup Language",
+      'Hyper Text Markup Language',
+      'High Text Machine Language',
+      'Hyperlinks and Text Markup Language',
+      'Home Tool Markup Language',
     ],
     correct: 0,
   },
   {
     id: 2,
-    question: "Which tag is used for headings?",
-    options: ["<div>", "<p>", "<h1>", "<span>"],
+    question: 'Which tag is used for headings?',
+    options: ['<div>', '<p>', '<h1>', '<span>'],
     correct: 2,
   },
   {
     id: 3,
-    question: "HTML files have which extension?",
-    options: [".css", ".js", ".html", ".php"],
+    question: 'HTML files have which extension?',
+    options: ['.css', '.js', '.html', '.php'],
     correct: 2,
   },
 ];
@@ -46,7 +46,7 @@ export default function QuizPage() {
         return ans === questions[i].correct ? acc + 1 : acc;
       }, 0);
 
-      navigate("/quiz-result", {
+      navigate('/quiz-result', {
         state: {
           score,
           total: questions.length,
@@ -74,9 +74,7 @@ export default function QuizPage() {
         </div>
 
         {/* Question */}
-        <h2 className="text-xl font-semibold text-slate-900 mb-6">
-          {questions[current].question}
-        </h2>
+        <h2 className="text-xl font-semibold text-slate-900 mb-6">{questions[current].question}</h2>
 
         {/* Options */}
         <div className="space-y-4">
@@ -86,8 +84,8 @@ export default function QuizPage() {
               onClick={() => handleSelect(index)}
               className={`w-full text-left px-5 py-4 rounded-lg border transition ${
                 answers[current] === index
-                  ? "border-purple-700 bg-purple-50"
-                  : "border-slate-300 hover:border-purple-400"
+                  ? 'border-purple-700 bg-purple-50'
+                  : 'border-slate-300 hover:border-purple-400'
               }`}
             >
               {option}
@@ -101,7 +99,7 @@ export default function QuizPage() {
             onClick={nextQuestion}
             className="px-6 py-3 rounded-lg bg-purple-700 text-white font-semibold hover:bg-purple-800"
           >
-            {current === questions.length - 1 ? "Submit Quiz" : "Next"}
+            {current === questions.length - 1 ? 'Submit Quiz' : 'Next'}
           </button>
         </div>
       </div>

@@ -18,8 +18,8 @@ export default function Hero() {
             </h1>
 
             <p className="mt-6 text-lg text-white/90 max-w-xl">
-              Learn with job-ready courses, real-world projects, live
-              mentorship, and certifications designed for modern professionals.
+              Learn with job-ready courses, real-world projects, live mentorship, and certifications
+              designed for modern professionals.
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-4">

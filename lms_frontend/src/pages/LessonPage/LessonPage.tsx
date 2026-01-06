@@ -1,6 +1,6 @@
-import LessonSidebar from "../../components/LessonPage/LessonSidebar";
-import LessonContent from "../../components/LessonPage/LessonContent";
-import LessonNavigation from "../../components/LessonPage/LessonNavigation";
+import LessonSidebar from '../../components/LessonPage/LessonSidebar';
+import LessonContent from '../../components/LessonPage/LessonContent';
+import LessonNavigation from '../../components/LessonPage/LessonNavigation';
 
 export default function LessonPage() {
   return (

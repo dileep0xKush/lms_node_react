@@ -1,33 +1,33 @@
 const mentors = [
   {
     id: 1,
-    name: "Shoo Thar Mein",
-    role: "Senior UX Designer",
-    company: "Google",
-    image: "https://randomuser.me/api/portraits/men/45.jpg",
+    name: 'Shoo Thar Mein',
+    role: 'Senior UX Designer',
+    company: 'Google',
+    image: 'https://randomuser.me/api/portraits/men/45.jpg',
     students: 4200,
     rating: 4.8,
-    skills: ["UX Design", "Figma", "Product"],
+    skills: ['UX Design', 'Figma', 'Product'],
   },
   {
     id: 2,
-    name: "Cristian Doru Barin",
-    role: "Photoshop Instructor",
-    company: "Adobe",
-    image: "https://randomuser.me/api/portraits/men/34.jpg",
+    name: 'Cristian Doru Barin',
+    role: 'Photoshop Instructor',
+    company: 'Adobe',
+    image: 'https://randomuser.me/api/portraits/men/34.jpg',
     students: 3100,
     rating: 4.7,
-    skills: ["Photoshop", "Branding", "UI"],
+    skills: ['Photoshop', 'Branding', 'UI'],
   },
   {
     id: 3,
-    name: "Tanzeel Ur Rehman",
-    role: "SEO Expert",
-    company: "Tech Solutions",
-    image: "https://randomuser.me/api/portraits/men/76.jpg",
+    name: 'Tanzeel Ur Rehman',
+    role: 'SEO Expert',
+    company: 'Tech Solutions',
+    image: 'https://randomuser.me/api/portraits/men/76.jpg',
     students: 2800,
     rating: 4.9,
-    skills: ["SEO", "Marketing", "Growth"],
+    skills: ['SEO', 'Marketing', 'Growth'],
   },
 ];
 
@@ -38,9 +38,7 @@ export default function Mentors() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-16">
           <div>
-            <h2 className="text-3xl font-extrabold text-slate-900">
-              Meet our mentors
-            </h2>
+            <h2 className="text-3xl font-extrabold text-slate-900">Meet our mentors</h2>
             <p className="mt-2 text-slate-500">
               Learn directly from experienced industry professionals
             </p>
@@ -61,10 +59,7 @@ export default function Mentors() {
 
             {/* Loop 2 (duplicate) */}
             {mentors.map((mentor) => (
-              <MentorCard
-                key={`${mentor.id}-duplicate`}
-                mentor={mentor}
-              />
+              <MentorCard key={`${mentor.id}-duplicate`} mentor={mentor} />
             ))}
           </div>
         </div>
@@ -91,9 +86,7 @@ function MentorCard({ mentor }: { mentor: any }) {
       </div>
 
       {/* Info */}
-      <h3 className="mt-6 text-lg font-bold text-slate-900">
-        {mentor.name}
-      </h3>
+      <h3 className="mt-6 text-lg font-bold text-slate-900">{mentor.name}</h3>
       <p className="text-sm text-slate-500">
         {mentor.role} · {mentor.company}
       </p>

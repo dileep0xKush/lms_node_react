@@ -1,6 +1,6 @@
-import { Outlet } from "react-router-dom";
-import Sidebar from "../components/layout/Sidebar";
-import Header from "../components/layout/Header";
+import { Outlet } from 'react-router-dom';
+import Sidebar from '../components/layout/Sidebar';
+import Header from '../components/layout/Header';
 
 export default function AuthLayout() {
   return (
@@ -10,7 +10,7 @@ export default function AuthLayout() {
       <div className="flex-1 flex flex-col">
         <Header
           onMenuClick={function (): void {
-            throw new Error("Function not implemented.");
+            throw new Error('Function not implemented.');
           }}
         />
 

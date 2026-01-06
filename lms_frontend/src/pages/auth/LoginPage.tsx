@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export default function LoginPage() {
   return (
@@ -23,8 +23,8 @@ export default function LoginPage() {
             </h1>
 
             <p className="mt-6 text-white/90 max-w-md">
-              Continue your learning journey, track progress, and grow your
-              skills with expert-led courses.
+              Continue your learning journey, track progress, and grow your skills with expert-led
+              courses.
             </p>
           </div>
 
@@ -45,14 +45,10 @@ export default function LoginPage() {
             <div className="h-10 w-10 rounded-lg bg-purple-700 text-white flex items-center justify-center font-bold">
               LMS
             </div>
-            <span className="text-lg font-semibold text-slate-900">
-              Skillify
-            </span>
+            <span className="text-lg font-semibold text-slate-900">Skillify</span>
           </div>
 
-          <h2 className="text-2xl font-extrabold text-slate-900">
-            Sign in to your account
-          </h2>
+          <h2 className="text-2xl font-extrabold text-slate-900">Sign in to your account</h2>
           <p className="text-slate-500 text-sm mt-2 mb-8">
             Welcome back! Please enter your details.
           </p>
@@ -92,10 +88,7 @@ export default function LoginPage() {
                 Remember me
               </label>
 
-              <Link
-                to="/forgot-password"
-                className="text-purple-700 hover:underline"
-              >
+              <Link to="/forgot-password" className="text-purple-700 hover:underline">
                 Forgot password?
               </Link>
             </div>
@@ -109,11 +102,8 @@ export default function LoginPage() {
           </form>
 
           <p className="text-sm text-slate-600 mt-6 text-center">
-            Don’t have an account?{" "}
-            <Link
-              to="/register"
-              className="text-purple-700 font-medium hover:underline"
-            >
+            Don’t have an account?{' '}
+            <Link to="/register" className="text-purple-700 font-medium hover:underline">
               Create one
             </Link>
           </p>

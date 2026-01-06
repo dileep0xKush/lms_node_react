@@ -1,39 +1,36 @@
-import CourseFilters from "../../components/courses/CourseFilters";
-import CourseCard from "../../components/courses/CourseCard";
+import CourseFilters from '../../components/courses/CourseFilters';
+import CourseCard from '../../components/courses/CourseCard';
 
 const courses = [
   {
     id: 1,
-    title: "React + Redux Toolkit",
-    category: "Frontend",
-    level: "Intermediate",
+    title: 'React + Redux Toolkit',
+    category: 'Frontend',
+    level: 'Intermediate',
     price: 99,
     rating: 4.8,
     students: 15300,
-    image:
-      "https://images.unsplash.com/photo-1633356122544-f134324a6cee",
+    image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee',
   },
   {
     id: 2,
-    title: "Node.js & Express",
-    category: "Backend",
-    level: "Beginner",
+    title: 'Node.js & Express',
+    category: 'Backend',
+    level: 'Beginner',
     price: 21,
     rating: 4.5,
     students: 8420,
-    image:
-      "https://images.unsplash.com/photo-1555949963-aa79dcee981c",
+    image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c',
   },
   {
     id: 3,
-    title: "MongoDB Mastery",
-    category: "Database",
-    level: "Advanced",
+    title: 'MongoDB Mastery',
+    category: 'Database',
+    level: 'Advanced',
     price: 21,
     rating: 4.4,
     students: 6780,
-    image:
-      "https://images.unsplash.com/photo-1587620962725-abab7fe55159",
+    image: 'https://images.unsplash.com/photo-1587620962725-abab7fe55159',
   },
 ];
 
@@ -43,12 +40,8 @@ export default function CoursesPage() {
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="mb-10">
-          <h1 className="text-4xl font-extrabold text-slate-900">
-            All Courses
-          </h1>
-          <p className="mt-2 text-slate-500">
-            Browse and filter courses to start learning today
-          </p>
+          <h1 className="text-4xl font-extrabold text-slate-900">All Courses</h1>
+          <p className="mt-2 text-slate-500">Browse and filter courses to start learning today</p>
         </div>
 
         <div className="grid lg:grid-cols-[280px_1fr] gap-10">

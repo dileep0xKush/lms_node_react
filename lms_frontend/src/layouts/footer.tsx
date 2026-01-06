@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export function Footer() {
   return (
@@ -14,14 +14,13 @@ export function Footer() {
           </div>
 
           <p className="text-sm leading-relaxed text-slate-400 max-w-md">
-            Skillify is a modern learning management system to create, manage,
-            and sell online courses with mentorship, analytics, and
-            certifications.
+            Skillify is a modern learning management system to create, manage, and sell online
+            courses with mentorship, analytics, and certifications.
           </p>
 
           {/* Social */}
           <div className="flex gap-4 mt-6">
-            {["🌐", "🐦", "📸", "▶️"].map((icon, i) => (
+            {['🌐', '🐦', '📸', '▶️'].map((icon, i) => (
               <span
                 key={i}
                 className="h-9 w-9 flex items-center justify-center rounded-md bg-slate-900 hover:bg-slate-800 cursor-pointer transition"
@@ -72,9 +71,7 @@ export function Footer() {
 
         {/* Newsletter */}
         <div>
-          <h4 className="text-sm font-semibold text-white mb-5">
-            Stay updated
-          </h4>
+          <h4 className="text-sm font-semibold text-white mb-5">Stay updated</h4>
 
           <p className="text-sm text-slate-400 mb-4">
             Product updates, learning tips, and special offers.
@@ -96,20 +93,12 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500">
-          <span>
-            © {new Date().getFullYear()} Skillify LMS. All rights reserved.
-          </span>
+          <span>© {new Date().getFullYear()} Skillify LMS. All rights reserved.</span>
 
           <div className="flex gap-6">
-            <span className="hover:text-white cursor-pointer">
-              Privacy Policy
-            </span>
-            <span className="hover:text-white cursor-pointer">
-              Terms of Service
-            </span>
-            <span className="hover:text-white cursor-pointer">
-              Cookie Policy
-            </span>
+            <span className="hover:text-white cursor-pointer">Privacy Policy</span>
+            <span className="hover:text-white cursor-pointer">Terms of Service</span>
+            <span className="hover:text-white cursor-pointer">Cookie Policy</span>
           </div>
         </div>
       </div>

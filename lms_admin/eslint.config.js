@@ -3,6 +3,7 @@ import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
+import prettierPlugin from 'eslint-plugin-prettier'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
@@ -10,18 +11,31 @@ export default defineConfig([
 
   {
     files: ['**/*.{ts,tsx}'],
+
     extends: [
       js.configs.recommended,
-      tseslint.configs.recommended,
+      ...tseslint.configs.recommended,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
     ],
+
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
     },
 
+    plugins: {
+      prettier: prettierPlugin,
+    },
+
     rules: {
+      'prettier/prettier': 'error',
+      'no-console': 'warn',
+      'no-debugger': 'error',
+      'prefer-const': 'error',
+      eqeqeq: ['error', 'always'],
+      curly: ['error', 'all'],
+
       'max-lines': [
         'warn',
         { max: 300, skipBlankLines: true, skipComments: true },
@@ -30,9 +44,14 @@ export default defineConfig([
         'error',
         { max: 50, skipBlankLines: true, skipComments: true, IIFEs: true },
       ],
-
-      complexity: ['warn', { max: 10 }],
+      complexity: ['warn', 10],
       'max-depth': ['warn', 4],
+      'max-params': ['warn', 5],
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_' },
+      ],
 
       'react/jsx-max-depth': ['warn', { max: 6 }],
     },
@@ -46,7 +65,7 @@ export default defineConfig([
         'error',
         { max: 40, skipBlankLines: true, skipComments: true },
       ],
-      complexity: ['warn', { max: 8 }],
+      complexity: ['warn', 8],
       'react/jsx-max-depth': ['warn', { max: 5 }],
     },
   },
@@ -59,7 +78,7 @@ export default defineConfig([
         'error',
         { max: 35, skipBlankLines: true, skipComments: true },
       ],
-      complexity: ['warn', { max: 6 }],
+      complexity: ['warn', 6],
       'react/jsx-max-depth': ['warn', { max: 4 }],
     },
   },

@@ -1,13 +1,13 @@
-import { useEffect, useRef, useState } from "react";
-import { FiUserPlus, FiUser } from "react-icons/fi";
-import Card from "../../components/Card";
-import Table from "../../components/Table";
-import Pagination from "../../components/Pagination";
-import UserActionsDropdown from "../../components/UserActionsDropdown";
-import UserFormModal, { type UserForm } from "./UserFormModal";
-import { getUsersApi } from "../../services/userService";
-import { useToast } from "../../components/toast/useToast";
-import { useLoader } from "../../context/LoaderContext";
+import { useEffect, useRef, useState } from 'react';
+import { FiUserPlus, FiUser } from 'react-icons/fi';
+import Card from '../../components/Card';
+import Table from '../../components/Table';
+import Pagination from '../../components/Pagination';
+import UserActionsDropdown from '../../components/UserActionsDropdown';
+import UserFormModal, { type UserForm } from './UserFormModal';
+import { getUsersApi } from '../../services/userService';
+import { useToast } from '../../components/toast/useToast';
+import { useLoader } from '../../context/LoaderContext';
 
 type User = UserForm & {
   _id: string;
@@ -40,23 +40,18 @@ export default function Users() {
       const mapped: User[] =
         res.data.users.map((u) => ({
           _id: u._id,
-          name: u.name ?? "",
-          email: u.email ?? "",
-          role:
-            u.role === "admin"
-              ? "Admin"
-              : u.role === "instructor"
-              ? "Instructor"
-              : "Student",
-          status: u.isActive ? "Active" : "Suspended",
+          name: u.name ?? '',
+          email: u.email ?? '',
+          role: u.role === 'admin' ? 'Admin' : u.role === 'instructor' ? 'Instructor' : 'Student',
+          status: u.isActive ? 'Active' : 'Suspended',
         })) ?? [];
 
       setUsers(mapped);
     } catch (err: any) {
-      if (err?.name === "AbortError") return;
+      if (err?.name === 'AbortError') return;
 
-      const msg = err instanceof Error ? err.message : "Failed to load users";
-      showToast(msg, "error");
+      const msg = err instanceof Error ? err.message : 'Failed to load users';
+      showToast(msg, 'error');
     } finally {
       hideLoader();
     }
@@ -105,7 +100,7 @@ export default function Users() {
 
       {/* Table */}
       <Card>
-        <Table headers={["User", "Email", "Role", "Status", ""]}>
+        <Table headers={['User', 'Email', 'Role', 'Status', '']}>
           {pagedUsers.map((u) => (
             <tr key={u._id} className="border-b last:border-none">
               <td className="py-3 px-3 flex items-center gap-2">
@@ -118,17 +113,13 @@ export default function Users() {
               <td className="px-3">{u.email}</td>
 
               <td className="px-3">
-                <span className="px-2 py-1 bg-blue-50 text-blue-600 rounded-lg">
-                  {u.role}
-                </span>
+                <span className="px-2 py-1 bg-blue-50 text-blue-600 rounded-lg">{u.role}</span>
               </td>
 
               <td className="px-3">
                 <span
                   className={`px-2 py-1 rounded-lg ${
-                    u.status === "Active"
-                      ? "bg-green-50 text-green-600"
-                      : "bg-red-50 text-red-600"
+                    u.status === 'Active' ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600'
                   }`}
                 >
                   {u.status}
@@ -138,7 +129,7 @@ export default function Users() {
               <td className="px-3 text-right">
                 <UserActionsDropdown
                   onEdit={() => openEdit(u)}
-                  onDelete={() => console.log("Delete", u._id)}
+                  onDelete={() => console.log('Delete', u._id)}
                 />
               </td>
             </tr>

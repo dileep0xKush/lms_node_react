@@ -1,4 +1,4 @@
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link } from 'react-router-dom';
 
 export default function QuizResultPage() {
   const location = useLocation();
@@ -13,14 +13,14 @@ export default function QuizResultPage() {
         {/* Status */}
         <div
           className={`mx-auto w-24 h-24 rounded-full flex items-center justify-center text-3xl font-bold ${
-            passed ? "bg-green-100 text-green-700" : "bg-red-100 text-red-600"
+            passed ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-600'
           }`}
         >
           {percentage}%
         </div>
 
         <h1 className="text-2xl font-extrabold text-slate-900 mt-6">
-          {passed ? "Congratulations 🎉" : "Better luck next time"}
+          {passed ? 'Congratulations 🎉' : 'Better luck next time'}
         </h1>
 
         <p className="text-slate-600 mt-2">
@@ -30,8 +30,8 @@ export default function QuizResultPage() {
         {/* Message */}
         <p className="mt-4 text-sm text-slate-500">
           {passed
-            ? "You have successfully passed the quiz."
-            : "You need at least 60% to pass. Try again!"}
+            ? 'You have successfully passed the quiz.'
+            : 'You need at least 60% to pass. Try again!'}
         </p>
 
         {/* Actions */}

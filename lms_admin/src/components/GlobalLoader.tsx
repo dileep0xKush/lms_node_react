@@ -1,4 +1,4 @@
-import { useLoader } from "../context/LoaderContext";
+import { useLoader } from '../context/LoaderContext';
 
 export default function GlobalLoader() {
   const { loading } = useLoader();

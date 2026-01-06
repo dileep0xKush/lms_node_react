@@ -1,16 +1,11 @@
-import {
-  FiUsers,
-  FiBookOpen,
-  FiDollarSign,
-  FiTrendingUp,
-} from "react-icons/fi";
-import { useEffect } from "react";
+import { FiUsers, FiBookOpen, FiDollarSign, FiTrendingUp } from 'react-icons/fi';
+import { useEffect } from 'react';
 
-import Card from "../../components/Card";
+import Card from '../../components/Card';
 
 export default function Dashboard() {
   useEffect(() => {
-    document.title = "Dashboard — LMS Admin";
+    document.title = 'Dashboard — LMS Admin';
   }, []);
 
   return (
@@ -21,9 +16,7 @@ export default function Dashboard() {
         <Card className="bg-gradient-to-br from-blue-50 to-white border-blue-100">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs uppercase tracking-wide text-gray-500">
-                Total Students
-              </p>
+              <p className="text-xs uppercase tracking-wide text-gray-500">Total Students</p>
               <h2 className="text-3xl font-bold mt-1">1,248</h2>
               <span className="text-xs text-green-600 flex items-center gap-1 mt-1">
                 <FiTrendingUp /> +8% this month
@@ -39,9 +32,7 @@ export default function Dashboard() {
         <Card className="bg-gradient-to-br from-purple-50 to-white border-purple-100">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs uppercase tracking-wide text-gray-500">
-                Active Courses
-              </p>
+              <p className="text-xs uppercase tracking-wide text-gray-500">Active Courses</p>
               <h2 className="text-3xl font-bold mt-1">32</h2>
               <span className="text-xs text-green-600 flex items-center gap-1 mt-1">
                 <FiTrendingUp /> +3 new this week
@@ -57,9 +48,7 @@ export default function Dashboard() {
         <Card className="bg-gradient-to-br from-green-50 to-white border-green-100">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs uppercase tracking-wide text-gray-500">
-                Monthly Revenue
-              </p>
+              <p className="text-xs uppercase tracking-wide text-gray-500">Monthly Revenue</p>
               <h2 className="text-3xl font-bold mt-1">$12,940</h2>
               <span className="text-xs text-green-600 flex items-center gap-1 mt-1">
                 <FiTrendingUp /> +12% growth
@@ -75,9 +64,7 @@ export default function Dashboard() {
         <Card className="bg-gradient-to-br from-orange-50 to-white border-orange-100">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs uppercase tracking-wide text-gray-500">
-                New Enrollments
-              </p>
+              <p className="text-xs uppercase tracking-wide text-gray-500">New Enrollments</p>
               <h2 className="text-3xl font-bold mt-1">187</h2>
               <span className="text-xs text-green-600 flex items-center gap-1 mt-1">
                 <FiTrendingUp /> +5% since last week

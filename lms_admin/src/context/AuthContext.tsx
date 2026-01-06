@@ -1,17 +1,9 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-} from "react";
-import type { ReactNode } from "react";
+import { createContext, useContext, useEffect, useRef, useState, useCallback } from 'react';
+import type { ReactNode } from 'react';
 
-import { loginApi, logoutApi, meApi } from "../services/authService";
-import type { ApiUser } from "../types/auth";
+import { loginApi, logoutApi, meApi } from '../services/authService';
+import type { ApiUser } from '../types/auth';
 
-// App-level user shape
 type User = {
   id: string;
   name: string;
@@ -51,7 +43,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       setUser(apiUser ? mapApiUser(apiUser) : null);
     } catch (err) {
-      console.error("Auth check failed:", err);
+      console.error('Auth check failed:', err);
       setUser(null);
     } finally {
       if (withLoading) setIsLoading(false);
@@ -72,7 +64,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await loginApi(email, password);
       await checkAuth(false);
     } catch (err) {
-      console.error("Login failed:", err);
+      console.error('Login failed:', err);
       throw err;
     } finally {
       setIsLoading(false);
@@ -85,7 +77,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await logoutApi();
       setUser(null);
     } catch (err) {
-      console.error("Logout failed:", err);
+      console.error('Logout failed:', err);
     } finally {
       setIsLoading(false);
     }
@@ -101,6 +93,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 // eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error("useAuth must be used within an AuthProvider");
+  if (!ctx) throw new Error('useAuth must be used within an AuthProvider');
   return ctx;
 }

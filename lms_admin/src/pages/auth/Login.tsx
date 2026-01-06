@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import PublicLayout from "../../layouts/PublicLayout";
-import Input from "../../components/Input";
-import Button from "../../components/Button";
-import { useToast } from "../../components/toast/useToast";
-import { FiEye, FiEyeOff } from "react-icons/fi";
-import { useLoader } from "../../context/LoaderContext";
-import { useAuth } from "../../context/AuthContext";
-import { validators } from "../../utils/validation";
-import { useFormValidator } from "../../hooks/useFormValidator";
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import PublicLayout from '../../layouts/PublicLayout';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+import { useToast } from '../../components/toast/useToast';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
+import { useLoader } from '../../context/LoaderContext';
+import { useAuth } from '../../context/AuthContext';
+import { validators } from '../../utils/validation';
+import { useFormValidator } from '../../hooks/useFormValidator';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -17,20 +17,20 @@ export default function Login() {
   const { login } = useAuth();
 
   useEffect(() => {
-    document.title = "Login — LMS Admin";
+    document.title = 'Login — LMS Admin';
   }, []);
 
   const [showPass, setShowPass] = useState(false);
 
   const { values, errors, handleChange, validateForm } = useFormValidator(
     {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
     {
       email: [validators.email],
       password: [validators.min(6)],
-    }
+    },
   );
 
   const handleLogin = async () => {
@@ -41,12 +41,11 @@ export default function Login() {
 
       await login(values.email, values.password);
 
-      showToast("Login successful", "success");
-      navigate("/dashboard", { replace: true });
+      showToast('Login successful', 'success');
+      navigate('/dashboard', { replace: true });
     } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "Login failed. Please try again.";
-      showToast(message, "error");
+      const message = err instanceof Error ? err.message : 'Login failed. Please try again.';
+      showToast(message, 'error');
     } finally {
       hideLoader();
     }
@@ -74,15 +73,15 @@ export default function Login() {
               label="Email"
               type="email"
               value={values.email}
-              onChange={handleChange("email")}
+              onChange={handleChange('email')}
               error={errors.email}
             />
 
             <Input
               label="Password"
-              type={showPass ? "text" : "password"}
+              type={showPass ? 'text' : 'password'}
               value={values.password}
-              onChange={handleChange("password")}
+              onChange={handleChange('password')}
               error={errors.password}
               rightIcon={
                 showPass ? (

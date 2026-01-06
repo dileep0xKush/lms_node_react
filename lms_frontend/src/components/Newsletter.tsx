@@ -24,8 +24,8 @@ export default function Newsletter() {
           </h2>
 
           <p className="text-slate-600 max-w-xl mx-auto mb-10">
-            Join thousands of learners receiving curated resources, mentor
-            tips, new course launches, and exclusive offers.
+            Join thousands of learners receiving curated resources, mentor tips, new course
+            launches, and exclusive offers.
           </p>
 
           {/* Input */}
@@ -40,9 +40,7 @@ export default function Newsletter() {
             </button>
           </div>
 
-          <p className="mt-4 text-xs text-slate-400">
-            No spam · Cancel anytime · Free forever
-          </p>
+          <p className="mt-4 text-xs text-slate-400">No spam · Cancel anytime · Free forever</p>
 
           {/* Social proof */}
           <div className="mt-8 flex items-center justify-center gap-3 text-sm text-slate-500">

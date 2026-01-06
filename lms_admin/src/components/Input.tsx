@@ -1,4 +1,4 @@
-import type { InputHTMLAttributes, ReactNode } from "react";
+import type { InputHTMLAttributes, ReactNode } from 'react';
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
@@ -17,8 +17,8 @@ export default function Input({ label, rightIcon, error, ...props }: Props) {
           className={`w-full border rounded-lg px-3 py-2 pr-10 outline-none
             ${
               error
-                ? "border-red-500 focus:ring-2 focus:ring-red-400"
-                : "border-gray-300 focus:ring-2 focus:ring-blue-500"
+                ? 'border-red-500 focus:ring-2 focus:ring-red-400'
+                : 'border-gray-300 focus:ring-2 focus:ring-blue-500'
             }`}
         />
 

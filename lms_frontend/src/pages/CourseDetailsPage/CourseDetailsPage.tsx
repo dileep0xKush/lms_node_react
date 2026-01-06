@@ -1,6 +1,6 @@
-import CourseSidebar from "../../components/CourseDetailsPage/CourseSidebar";
-import CourseCurriculum from "../../components/CourseDetailsPage/CourseCurriculum";
-import CourseInstructor from "../../components/CourseDetailsPage/CourseInstructor";
+import CourseSidebar from '../../components/CourseDetailsPage/CourseSidebar';
+import CourseCurriculum from '../../components/CourseDetailsPage/CourseCurriculum';
+import CourseInstructor from '../../components/CourseDetailsPage/CourseInstructor';
 
 export default function CourseDetailsPage() {
   return (
@@ -10,17 +10,15 @@ export default function CourseDetailsPage() {
         <div className="grid lg:grid-cols-[1fr_380px] gap-12">
           {/* Left */}
           <div>
-            <span className="text-sm text-purple-700 font-medium">
-              Frontend · Intermediate
-            </span>
+            <span className="text-sm text-purple-700 font-medium">Frontend · Intermediate</span>
 
             <h1 className="text-4xl font-extrabold text-slate-900 mt-3">
               React + Redux Toolkit – Build Scalable Apps
             </h1>
 
             <p className="mt-4 text-slate-600 max-w-2xl">
-              Master modern React development with Redux Toolkit, real-world
-              projects, best practices, and performance optimization.
+              Master modern React development with Redux Toolkit, real-world projects, best
+              practices, and performance optimization.
             </p>
 
             {/* Meta */}

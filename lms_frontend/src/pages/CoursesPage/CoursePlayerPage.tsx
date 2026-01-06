@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const lessons = [
-  { id: 1, title: "Introduction", duration: "5:12", active: true },
-  { id: 2, title: "Project Setup", duration: "12:30" },
-  { id: 3, title: "Redux Toolkit Basics", duration: "18:45" },
-  { id: 4, title: "Async Thunks", duration: "22:10" },
+  { id: 1, title: 'Introduction', duration: '5:12', active: true },
+  { id: 2, title: 'Project Setup', duration: '12:30' },
+  { id: 3, title: 'Redux Toolkit Basics', duration: '18:45' },
+  { id: 4, title: 'Async Thunks', duration: '22:10' },
 ];
 
 export default function CoursePlayerPage() {
@@ -19,9 +19,7 @@ export default function CoursePlayerPage() {
               ← Back to dashboard
             </Link>
 
-            <span className="text-sm text-slate-400">
-              React + Redux Toolkit
-            </span>
+            <span className="text-sm text-slate-400">React + Redux Toolkit</span>
           </div>
 
           {/* Video */}
@@ -37,12 +35,10 @@ export default function CoursePlayerPage() {
 
           {/* Lesson Info */}
           <div className="mt-6">
-            <h1 className="text-2xl font-bold">
-              Redux Toolkit Basics
-            </h1>
+            <h1 className="text-2xl font-bold">Redux Toolkit Basics</h1>
             <p className="text-slate-400 mt-2 max-w-2xl">
-              Learn how Redux Toolkit simplifies state management and helps
-              build scalable React applications.
+              Learn how Redux Toolkit simplifies state management and helps build scalable React
+              applications.
             </p>
           </div>
 
@@ -51,32 +47,24 @@ export default function CoursePlayerPage() {
             <div className="h-2 bg-slate-700 rounded-full">
               <div className="h-2 bg-purple-600 rounded-full w-[45%]" />
             </div>
-            <p className="text-xs text-slate-400 mt-2">
-              45% completed
-            </p>
+            <p className="text-xs text-slate-400 mt-2">45% completed</p>
           </div>
         </div>
 
         {/* SIDEBAR – LESSONS */}
         <aside className="bg-slate-800 border-l border-slate-700 p-6 overflow-y-auto">
-          <h3 className="text-lg font-semibold mb-4">
-            Course content
-          </h3>
+          <h3 className="text-lg font-semibold mb-4">Course content</h3>
 
           <ul className="space-y-2">
             {lessons.map((lesson) => (
               <li
                 key={lesson.id}
                 className={`p-3 rounded-lg cursor-pointer flex justify-between items-center ${
-                  lesson.active
-                    ? "bg-purple-600"
-                    : "hover:bg-slate-700"
+                  lesson.active ? 'bg-purple-600' : 'hover:bg-slate-700'
                 }`}
               >
                 <span className="text-sm">{lesson.title}</span>
-                <span className="text-xs text-slate-300">
-                  {lesson.duration}
-                </span>
+                <span className="text-xs text-slate-300">{lesson.duration}</span>
               </li>
             ))}
           </ul>

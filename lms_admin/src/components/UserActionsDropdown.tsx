@@ -1,5 +1,5 @@
-import { FiEdit2, FiTrash2, FiMoreVertical } from "react-icons/fi";
-import Dropdown from "./Dropdown";
+import { FiEdit2, FiTrash2, FiMoreVertical } from 'react-icons/fi';
+import Dropdown from './Dropdown';
 
 type Props = {
   onEdit: () => void;

@@ -1,45 +1,45 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const mentors = [
   {
     id: 1,
-    name: "John Anderson",
-    role: "Senior Frontend Engineer",
-    company: "Google",
-    students: "12,400",
+    name: 'John Anderson',
+    role: 'Senior Frontend Engineer',
+    company: 'Google',
+    students: '12,400',
     courses: 8,
     rating: 4.8,
-    image: "https://randomuser.me/api/portraits/men/32.jpg",
+    image: 'https://randomuser.me/api/portraits/men/32.jpg',
   },
   {
     id: 2,
-    name: "Sophia Williams",
-    role: "Data Scientist",
-    company: "Microsoft",
-    students: "9,800",
+    name: 'Sophia Williams',
+    role: 'Data Scientist',
+    company: 'Microsoft',
+    students: '9,800',
     courses: 6,
     rating: 4.9,
-    image: "https://randomuser.me/api/portraits/women/44.jpg",
+    image: 'https://randomuser.me/api/portraits/women/44.jpg',
   },
   {
     id: 3,
-    name: "Daniel Lee",
-    role: "Backend Architect",
-    company: "Amazon",
-    students: "7,200",
+    name: 'Daniel Lee',
+    role: 'Backend Architect',
+    company: 'Amazon',
+    students: '7,200',
     courses: 5,
     rating: 4.7,
-    image: "https://randomuser.me/api/portraits/men/76.jpg",
+    image: 'https://randomuser.me/api/portraits/men/76.jpg',
   },
   {
     id: 4,
-    name: "Emily Carter",
-    role: "UI/UX Designer",
-    company: "Adobe",
-    students: "10,100",
+    name: 'Emily Carter',
+    role: 'UI/UX Designer',
+    company: 'Adobe',
+    students: '10,100',
     courses: 7,
     rating: 4.9,
-    image: "https://randomuser.me/api/portraits/women/65.jpg",
+    image: 'https://randomuser.me/api/portraits/women/65.jpg',
   },
 ];
 
@@ -49,12 +49,10 @@ export default function MentorsPage() {
       <div className="max-w-7xl mx-auto px-6 space-y-16">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto">
-          <h1 className="text-4xl font-extrabold text-slate-900">
-            Learn from industry experts
-          </h1>
+          <h1 className="text-4xl font-extrabold text-slate-900">Learn from industry experts</h1>
           <p className="mt-4 text-slate-600">
-            Our mentors are professionals from top tech companies, guiding
-            thousands of learners worldwide.
+            Our mentors are professionals from top tech companies, guiding thousands of learners
+            worldwide.
           </p>
         </div>
 
@@ -91,17 +89,11 @@ export default function MentorsPage() {
               className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden"
             >
               {/* Image */}
-              <img
-                src={mentor.image}
-                alt={mentor.name}
-                className="h-56 w-full object-cover"
-              />
+              <img src={mentor.image} alt={mentor.name} className="h-56 w-full object-cover" />
 
               {/* Content */}
               <div className="p-6 space-y-3">
-                <h3 className="text-lg font-semibold text-slate-900">
-                  {mentor.name}
-                </h3>
+                <h3 className="text-lg font-semibold text-slate-900">{mentor.name}</h3>
 
                 <p className="text-sm text-slate-500">
                   {mentor.role} · {mentor.company}
@@ -128,9 +120,7 @@ export default function MentorsPage() {
 
         {/* CTA */}
         <div className="text-center">
-          <h3 className="text-2xl font-bold text-slate-900">
-            Want to become a mentor?
-          </h3>
+          <h3 className="text-2xl font-bold text-slate-900">Want to become a mentor?</h3>
           <p className="text-slate-600 mt-2">
             Share your knowledge and earn by teaching learners worldwide.
           </p>

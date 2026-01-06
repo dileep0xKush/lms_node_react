@@ -1,9 +1,7 @@
 export default function CourseInstructor() {
   return (
     <div>
-      <h2 className="text-2xl font-bold text-slate-900 mb-6">
-        Instructor
-      </h2>
+      <h2 className="text-2xl font-bold text-slate-900 mb-6">Instructor</h2>
 
       <div className="bg-white rounded-2xl p-8 shadow-sm flex gap-6 items-start">
         <img
@@ -13,16 +11,12 @@ export default function CourseInstructor() {
         />
 
         <div>
-          <h3 className="text-lg font-semibold text-slate-900">
-            Emily Johnson
-          </h3>
-          <p className="text-sm text-slate-500 mb-3">
-            Senior Frontend Engineer
-          </p>
+          <h3 className="text-lg font-semibold text-slate-900">Emily Johnson</h3>
+          <p className="text-sm text-slate-500 mb-3">Senior Frontend Engineer</p>
 
           <p className="text-sm text-slate-600 max-w-xl">
-            Emily has over 10 years of experience building scalable web
-            applications and mentoring developers worldwide.
+            Emily has over 10 years of experience building scalable web applications and mentoring
+            developers worldwide.
           </p>
 
           <div className="mt-4 text-sm text-slate-500">

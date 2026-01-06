@@ -1,5 +1,5 @@
-import { useState } from "react";
-import type { ValidationResult } from "../utils/validation";
+import { useState } from 'react';
+import type { ValidationResult } from '../utils/validation';
 
 type FieldRule = (value: string) => ValidationResult;
 
@@ -9,7 +9,7 @@ export type FormSchema<T extends Record<string, string>> = {
 
 export function useFormValidator<T extends Record<string, string>>(
   initialValues: T,
-  schema: FormSchema<T>
+  schema: FormSchema<T>,
 ) {
   const [values, setValues] = useState<T>(initialValues);
 
@@ -38,17 +38,16 @@ export function useFormValidator<T extends Record<string, string>>(
     return true;
   };
 
-  const handleChange =
-    (name: keyof T) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
+  const handleChange = (name: keyof T) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
 
-      setValues((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
+    setValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
 
-      validateField(name, value);
-    };
+    validateField(name, value);
+  };
 
   const validateForm = () => {
     let ok = true;

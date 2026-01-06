@@ -1,27 +1,27 @@
 const logos = [
   {
-    name: "Airbnb",
-    src: "https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_Bélo.svg",
+    name: 'Airbnb',
+    src: 'https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_Bélo.svg',
   },
   {
-    name: "Microsoft",
-    src: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
+    name: 'Microsoft',
+    src: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg',
   },
   {
-    name: "Google",
-    src: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
+    name: 'Google',
+    src: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg',
   },
   {
-    name: "Airbnb",
-    src: "https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_Bélo.svg",
+    name: 'Airbnb',
+    src: 'https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_Bélo.svg',
   },
   {
-    name: "Microsoft",
-    src: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
+    name: 'Microsoft',
+    src: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg',
   },
   {
-    name: "Google",
-    src: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
+    name: 'Google',
+    src: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg',
   },
 ];
 

@@ -1,33 +1,31 @@
 const reviews = [
   {
     id: 1,
-    name: "Tanzeel Rehman",
-    role: "Backend Developer",
-    company: "Tech Solutions",
+    name: 'Tanzeel Rehman',
+    role: 'Backend Developer',
+    company: 'Tech Solutions',
     rating: 5,
-    image: "https://randomuser.me/api/portraits/men/76.jpg",
+    image: 'https://randomuser.me/api/portraits/men/76.jpg',
     message:
-      "Very practical learning experience. The hands-on projects made a huge difference in my confidence.",
+      'Very practical learning experience. The hands-on projects made a huge difference in my confidence.',
   },
   {
     id: 2,
-    name: "Andrew Williams",
-    role: "Frontend Engineer",
-    company: "Startup Inc.",
+    name: 'Andrew Williams',
+    role: 'Frontend Engineer',
+    company: 'Startup Inc.',
     rating: 5,
-    image: "https://randomuser.me/api/portraits/men/32.jpg",
-    message:
-      "The mentorship and projects helped me transition into a real-world engineering role.",
+    image: 'https://randomuser.me/api/portraits/men/32.jpg',
+    message: 'The mentorship and projects helped me transition into a real-world engineering role.',
   },
   {
     id: 3,
-    name: "Cristina Doru",
-    role: "UX Designer",
-    company: "Design Studio",
+    name: 'Cristina Doru',
+    role: 'UX Designer',
+    company: 'Design Studio',
     rating: 4,
-    image: "https://randomuser.me/api/portraits/women/44.jpg",
-    message:
-      "Clean content, great structure, and very helpful instructors. Highly recommended.",
+    image: 'https://randomuser.me/api/portraits/women/44.jpg',
+    message: 'Clean content, great structure, and very helpful instructors. Highly recommended.',
   },
 ];
 
@@ -82,11 +80,7 @@ function ReviewCard({ review }: { review: any }) {
 
       {/* User */}
       <div className="flex items-center gap-4">
-        <img
-          src={review.image}
-          alt={review.name}
-          className="w-12 h-12 rounded-full object-cover"
-        />
+        <img src={review.image} alt={review.name} className="w-12 h-12 rounded-full object-cover" />
         <div>
           <h4 className="font-semibold text-slate-900">{review.name}</h4>
           <p className="text-sm text-slate-500">

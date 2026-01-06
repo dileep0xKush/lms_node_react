@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export default function RegisterPage() {
   return (
@@ -23,8 +23,8 @@ export default function RegisterPage() {
             </h1>
 
             <p className="mt-6 text-white/90 max-w-md">
-              Join thousands of learners mastering real-world skills with
-              expert-led courses and hands-on projects.
+              Join thousands of learners mastering real-world skills with expert-led courses and
+              hands-on projects.
             </p>
           </div>
 
@@ -45,17 +45,11 @@ export default function RegisterPage() {
             <div className="h-10 w-10 rounded-lg bg-purple-700 text-white flex items-center justify-center font-bold">
               LMS
             </div>
-            <span className="text-lg font-semibold text-slate-900">
-              Skillify
-            </span>
+            <span className="text-lg font-semibold text-slate-900">Skillify</span>
           </div>
 
-          <h2 className="text-2xl font-extrabold text-slate-900">
-            Create your account
-          </h2>
-          <p className="text-slate-500 text-sm mt-2 mb-8">
-            Start learning today — it’s free
-          </p>
+          <h2 className="text-2xl font-extrabold text-slate-900">Create your account</h2>
+          <p className="text-slate-500 text-sm mt-2 mb-8">Start learning today — it’s free</p>
 
           {/* Social Login */}
           <div className="space-y-3 mb-6">
@@ -101,17 +95,13 @@ export default function RegisterPage() {
           </form>
 
           <p className="text-xs text-slate-500 mt-6 text-center">
-            By signing up, you agree to our{" "}
-            <span className="underline cursor-pointer">Terms</span> and{" "}
-            <span className="underline cursor-pointer">Privacy Policy</span>.
+            By signing up, you agree to our <span className="underline cursor-pointer">Terms</span>{' '}
+            and <span className="underline cursor-pointer">Privacy Policy</span>.
           </p>
 
           <p className="text-sm text-slate-600 mt-6 text-center">
-            Already have an account?{" "}
-            <Link
-              to="/login"
-              className="text-purple-700 font-medium hover:underline"
-            >
+            Already have an account?{' '}
+            <Link to="/login" className="text-purple-700 font-medium hover:underline">
               Sign in
             </Link>
           </p>

@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import PublicLayout from "../../layouts/PublicLayout";
-import Input from "../../components/Input";
-import Button from "../../components/Button";
-import { useToast } from "../../components/toast/useToast";
-import { useLoader } from "../../context/LoaderContext";
-import { forgotPasswordApi } from "../../services/authService";
-import { validators } from "../../utils/validation";
-import { useFormValidator } from "../../hooks/useFormValidator";
+import { useEffect, useState } from 'react';
+import PublicLayout from '../../layouts/PublicLayout';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+import { useToast } from '../../components/toast/useToast';
+import { useLoader } from '../../context/LoaderContext';
+import { forgotPasswordApi } from '../../services/authService';
+import { validators } from '../../utils/validation';
+import { useFormValidator } from '../../hooks/useFormValidator';
 
 export default function ForgotPassword() {
   const { showToast } = useToast();
@@ -15,13 +15,13 @@ export default function ForgotPassword() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    document.title = "Forgot Password — LMS Admin";
+    document.title = 'Forgot Password — LMS Admin';
   }, []);
 
   // 👇 central form validation
   const { values, errors, handleChange, validateForm } = useFormValidator(
-    { email: "" },
-    { email: [validators.email] }
+    { email: '' },
+    { email: [validators.email] },
   );
 
   const handleSubmit = async () => {
@@ -33,13 +33,11 @@ export default function ForgotPassword() {
 
       await forgotPasswordApi(values.email);
 
-      showToast("Reset link sent to your email", "success");
+      showToast('Reset link sent to your email', 'success');
     } catch (err) {
       const message =
-        err instanceof Error
-          ? err.message
-          : "Failed to send reset link. Please try again.";
-      showToast(message, "error");
+        err instanceof Error ? err.message : 'Failed to send reset link. Please try again.';
+      showToast(message, 'error');
     } finally {
       hideLoader();
       setLoading(false);
@@ -57,12 +55,8 @@ export default function ForgotPassword() {
 
         <div className="relative bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/40 p-6 sm:p-8 w-[95%] max-w-md">
           <div className="text-center mb-4">
-            <h2 className="text-2xl font-extrabold tracking-wide">
-              Reset Password
-            </h2>
-            <p className="text-gray-500 text-sm">
-              Enter your email to receive reset instructions
-            </p>
+            <h2 className="text-2xl font-extrabold tracking-wide">Reset Password</h2>
+            <p className="text-gray-500 text-sm">Enter your email to receive reset instructions</p>
           </div>
 
           <div className="space-y-4">
@@ -70,16 +64,12 @@ export default function ForgotPassword() {
               label="Email"
               type="email"
               value={values.email}
-              onChange={handleChange("email")}
+              onChange={handleChange('email')}
               error={errors.email}
             />
 
-            <Button
-              className="w-full mt-1"
-              onClick={handleSubmit}
-              disabled={loading}
-            >
-              {loading ? "Sending..." : "Send Reset Link"}
+            <Button className="w-full mt-1" onClick={handleSubmit} disabled={loading}>
+              {loading ? 'Sending...' : 'Send Reset Link'}
             </Button>
           </div>
         </div>

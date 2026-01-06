@@ -1,9 +1,7 @@
 export default function CourseSidebar() {
   return (
     <aside className="bg-white rounded-2xl shadow-sm p-8 sticky top-24 h-fit">
-      <div className="text-3xl font-extrabold text-slate-900 mb-4">
-        $99
-      </div>
+      <div className="text-3xl font-extrabold text-slate-900 mb-4">$99</div>
 
       <button className="w-full py-3 rounded-lg bg-purple-700 text-white font-semibold hover:bg-purple-800 transition">
         Enroll now

@@ -1,11 +1,11 @@
-import Modal from "../../components/Modal";
+import Modal from '../../components/Modal';
 
 export type UserForm = {
   _id?: string;
   name: string;
   email: string;
-  role: "Student" | "Instructor" | "Admin";
-  status: "Active" | "Suspended";
+  role: 'Student' | 'Instructor' | 'Admin';
+  status: 'Active' | 'Suspended';
 };
 
 type Props = {
@@ -15,30 +15,23 @@ type Props = {
   onSubmit: (data: UserForm) => void;
 };
 
-export default function UserFormModal({
-  open,
-  user,
-  onClose,
-  onSubmit,
-}: Props) {
+export default function UserFormModal({ open, user, onClose, onSubmit }: Props) {
   if (!open) return null;
 
   const handleSubmit = () => {
     onSubmit({
       _id: user?._id,
-      name: (document.getElementById("name") as HTMLInputElement).value,
-      email: (document.getElementById("email") as HTMLInputElement).value,
-      role: (document.getElementById("role") as HTMLSelectElement)
-        .value as UserForm["role"],
-      status: (document.getElementById("status") as HTMLSelectElement)
-        .value as UserForm["status"],
+      name: (document.getElementById('name') as HTMLInputElement).value,
+      email: (document.getElementById('email') as HTMLInputElement).value,
+      role: (document.getElementById('role') as HTMLSelectElement).value as UserForm['role'],
+      status: (document.getElementById('status') as HTMLSelectElement).value as UserForm['status'],
     });
   };
 
   return (
     <Modal
       size="xl"
-      title={user ? "Edit User" : "Add New User"}
+      title={user ? 'Edit User' : 'Add New User'}
       onClose={onClose}
       onSubmit={handleSubmit}
     >
@@ -48,7 +41,7 @@ export default function UserFormModal({
           <input
             id="name"
             className="w-full border rounded-lg px-3 py-2"
-            defaultValue={user?.name ?? ""}
+            defaultValue={user?.name ?? ''}
           />
         </div>
 
@@ -57,7 +50,7 @@ export default function UserFormModal({
           <input
             id="email"
             className="w-full border rounded-lg px-3 py-2"
-            defaultValue={user?.email ?? ""}
+            defaultValue={user?.email ?? ''}
           />
         </div>
 
@@ -66,7 +59,7 @@ export default function UserFormModal({
           <select
             id="role"
             className="w-full border rounded-lg px-3 py-2"
-            defaultValue={user?.role ?? "Student"}
+            defaultValue={user?.role ?? 'Student'}
           >
             <option>Student</option>
             <option>Instructor</option>
@@ -79,7 +72,7 @@ export default function UserFormModal({
           <select
             id="status"
             className="w-full border rounded-lg px-3 py-2"
-            defaultValue={user?.status ?? "Active"}
+            defaultValue={user?.status ?? 'Active'}
           >
             <option>Active</option>
             <option>Suspended</option>

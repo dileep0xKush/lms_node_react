@@ -7,12 +7,10 @@ export default function Contact() {
           <div className="space-y-10">
             {/* Text */}
             <div>
-              <h2 className="text-4xl font-extrabold text-slate-900">
-                Get in touch
-              </h2>
+              <h2 className="text-4xl font-extrabold text-slate-900">Get in touch</h2>
               <p className="mt-4 text-slate-600 max-w-md">
-                Have questions about courses, mentorship, or partnerships? Our
-                team is always ready to help.
+                Have questions about courses, mentorship, or partnerships? Our team is always ready
+                to help.
               </p>
 
               <div className="mt-8 space-y-3 text-sm text-slate-600">
@@ -43,9 +41,7 @@ export default function Contact() {
           {/* RIGHT: Form */}
           <form className="bg-white rounded-2xl p-10 shadow-sm space-y-8">
             <div>
-              <label className="block mb-2 text-sm font-medium text-slate-700">
-                Full name
-              </label>
+              <label className="block mb-2 text-sm font-medium text-slate-700">Full name</label>
               <input
                 type="text"
                 placeholder="John Doe"
@@ -54,9 +50,7 @@ export default function Contact() {
             </div>
 
             <div>
-              <label className="block mb-2 text-sm font-medium text-slate-700">
-                Email address
-              </label>
+              <label className="block mb-2 text-sm font-medium text-slate-700">Email address</label>
               <input
                 type="email"
                 placeholder="john@example.com"
@@ -65,9 +59,7 @@ export default function Contact() {
             </div>
 
             <div>
-              <label className="block mb-2 text-sm font-medium text-slate-700">
-                Message
-              </label>
+              <label className="block mb-2 text-sm font-medium text-slate-700">Message</label>
               <textarea
                 rows={4}
                 placeholder="Tell us how we can help you..."

@@ -24,21 +24,15 @@ export default function CourseCard({ course }: { course: Course }) {
           {course.category} · {course.level}
         </span>
 
-        <h3 className="mt-2 font-semibold text-slate-900 line-clamp-2">
-          {course.title}
-        </h3>
+        <h3 className="mt-2 font-semibold text-slate-900 line-clamp-2">{course.title}</h3>
 
         <div className="mt-3 flex items-center justify-between text-sm">
           <span className="text-yellow-500">
             ★ {course.rating}
-            <span className="text-slate-400 ml-1">
-              ({course.students.toLocaleString()})
-            </span>
+            <span className="text-slate-400 ml-1">({course.students.toLocaleString()})</span>
           </span>
 
-          <span className="font-bold text-primary">
-            ${course.price}
-          </span>
+          <span className="font-bold text-primary">${course.price}</span>
         </div>
       </div>
     </div>

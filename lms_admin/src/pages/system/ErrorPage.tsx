@@ -1,29 +1,29 @@
-import { isRouteErrorResponse, useRouteError } from "react-router-dom";
-import Button from "../../components/Button";
+import { isRouteErrorResponse, useRouteError } from 'react-router-dom';
+import Button from '../../components/Button';
 
 export default function ErrorPage() {
   const error = useRouteError();
 
   let code = 500;
-  let title = "Something went wrong";
-  let message = "An unexpected error occurred.";
+  let title = 'Something went wrong';
+  let message = 'An unexpected error occurred.';
 
   if (isRouteErrorResponse(error)) {
     code = error.status;
 
     if (code === 404) {
-      title = "Page Not Found";
-      message = "Sorry, the page you’re looking for doesn’t exist.";
+      title = 'Page Not Found';
+      message = 'Sorry, the page you’re looking for doesn’t exist.';
     }
 
     if (code === 403) {
-      title = "Access Denied";
-      message = "You don’t have permission to view this page.";
+      title = 'Access Denied';
+      message = 'You don’t have permission to view this page.';
     }
 
     if (code === 500) {
-      title = "Internal Server Error";
-      message = "We’re working to fix this issue.";
+      title = 'Internal Server Error';
+      message = 'We’re working to fix this issue.';
     }
   }
 
@@ -52,7 +52,7 @@ export default function ErrorPage() {
 
           <Button
             className="bg-gray-800 hover:bg-black text-white"
-            onClick={() => (window.location.href = "/")}
+            onClick={() => (window.location.href = '/')}
           >
             Go Home
           </Button>
