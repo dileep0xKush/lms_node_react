@@ -15,7 +15,7 @@ declare global {
       error(
         message?: string,
         statusCode?: number,
-        error?: any
+        error?: unknown
       ): Response<ApiErrorResponse>;
     }
   }

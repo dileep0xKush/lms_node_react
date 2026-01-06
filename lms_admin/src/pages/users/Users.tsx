@@ -1,55 +1,77 @@
-import { useState } from "react";
-import {
-  FiUserPlus,
-  FiSearch,
-  FiEdit2,
-  FiTrash2,
-  FiUser,
-} from "react-icons/fi";
+import { useEffect, useRef, useState } from "react";
+import { FiUserPlus, FiUser } from "react-icons/fi";
 import Card from "../../components/Card";
-import Modal from "../../components/Modal";
 import Table from "../../components/Table";
 import Pagination from "../../components/Pagination";
+import UserActionsDropdown from "../../components/UserActionsDropdown";
+import UserFormModal, { type UserForm } from "./UserFormModal";
+import { getUsersApi } from "../../services/userService";
+import { useToast } from "../../components/toast/useToast";
+import { useLoader } from "../../context/LoaderContext";
 
-type User = {
-  id: number;
-  name: string;
-  email: string;
-  role: "Student" | "Instructor" | "Admin";
-  status: "Active" | "Suspended";
+type User = UserForm & {
+  _id: string;
 };
 
 export default function Users() {
+  const { showToast } = useToast();
+  const { showLoader, hideLoader } = useLoader();
+
   const [openModal, setOpenModal] = useState(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
+
   const [page, setPage] = useState(1);
-
-  const users: User[] = [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john@mail.com",
-      role: "Student",
-      status: "Active",
-    },
-    {
-      id: 2,
-      name: "Sarah Smith",
-      email: "sarah@mail.com",
-      role: "Instructor",
-      status: "Active",
-    },
-    {
-      id: 3,
-      name: "Mark Lee",
-      email: "mark@mail.com",
-      role: "Student",
-      status: "Suspended",
-    },
-  ];
-
   const pageSize = 5;
-  const totalPages = Math.ceil(users.length / pageSize);
+
+  const [users, setUsers] = useState<User[]>([]);
+
+  const loadedRef = useRef(false);
+  const abortRef = useRef<AbortController | null>(null);
+
+  const fetchUsers = async () => {
+    try {
+      showLoader();
+
+      abortRef.current?.abort();
+      abortRef.current = new AbortController();
+
+      const res = await getUsersApi();
+
+      const mapped: User[] =
+        res.data.users.map((u) => ({
+          _id: u._id,
+          name: u.name ?? "",
+          email: u.email ?? "",
+          role:
+            u.role === "admin"
+              ? "Admin"
+              : u.role === "instructor"
+              ? "Instructor"
+              : "Student",
+          status: u.isActive ? "Active" : "Suspended",
+        })) ?? [];
+
+      setUsers(mapped);
+    } catch (err: any) {
+      if (err?.name === "AbortError") return;
+
+      const msg = err instanceof Error ? err.message : "Failed to load users";
+      showToast(msg, "error");
+    } finally {
+      hideLoader();
+    }
+  };
+
+  useEffect(() => {
+    if (loadedRef.current) return;
+    loadedRef.current = true;
+
+    fetchUsers();
+
+    return () => abortRef.current?.abort();
+  }, []);
+
+  const totalPages = Math.ceil(users.length / pageSize) || 1;
   const pagedUsers = users.slice((page - 1) * pageSize, page * pageSize);
 
   const openEdit = (user: User) => {
@@ -60,6 +82,11 @@ export default function Users() {
   const openCreate = () => {
     setEditingUser(null);
     setOpenModal(true);
+  };
+
+  const handleSubmit = async (_data: UserForm) => {
+    setOpenModal(false);
+    await fetchUsers(); // refresh after save (API integration later)
   };
 
   return (
@@ -76,31 +103,11 @@ export default function Users() {
         </button>
       </div>
 
-      {/* Search + Filters */}
-      <Card>
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 bg-gray-100 rounded-xl px-3 py-2 w-64">
-            <FiSearch className="text-gray-500" />
-            <input
-              placeholder="Search users…"
-              className="bg-transparent outline-none text-sm w-full"
-            />
-          </div>
-
-          <select className="px-3 py-2 rounded-xl border text-sm">
-            <option>All Roles</option>
-            <option>Student</option>
-            <option>Instructor</option>
-            <option>Admin</option>
-          </select>
-        </div>
-      </Card>
-
-      {/* Table + Pagination */}
+      {/* Table */}
       <Card>
         <Table headers={["User", "Email", "Role", "Status", ""]}>
           {pagedUsers.map((u) => (
-            <tr key={u.id} className="border-b last:border-none">
+            <tr key={u._id} className="border-b last:border-none">
               <td className="py-3 px-3 flex items-center gap-2">
                 <span className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
                   <FiUser />
@@ -128,17 +135,11 @@ export default function Users() {
                 </span>
               </td>
 
-              <td className="px-3 text-right flex justify-end gap-2">
-                <button
-                  onClick={() => openEdit(u)}
-                  className="p-2 rounded-lg hover:bg-gray-100"
-                >
-                  <FiEdit2 />
-                </button>
-
-                <button className="p-2 rounded-lg hover:bg-red-50 text-red-500">
-                  <FiTrash2 />
-                </button>
+              <td className="px-3 text-right">
+                <UserActionsDropdown
+                  onEdit={() => openEdit(u)}
+                  onDelete={() => console.log("Delete", u._id)}
+                />
               </td>
             </tr>
           ))}
@@ -148,49 +149,12 @@ export default function Users() {
       </Card>
 
       {/* Modal */}
-      {openModal && (
-        <Modal
-          size="xl"
-          title={editingUser ? "Edit User" : "Add New User"}
-          onClose={() => setOpenModal(false)}
-          onSubmit={() => setOpenModal(false)}
-        >
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="text-xs text-gray-500">Full Name</label>
-              <input
-                className="w-full border rounded-lg px-3 py-2"
-                defaultValue={editingUser?.name ?? ""}
-              />
-            </div>
-
-            <div>
-              <label className="text-xs text-gray-500">Email</label>
-              <input
-                className="w-full border rounded-lg px-3 py-2"
-                defaultValue={editingUser?.email ?? ""}
-              />
-            </div>
-
-            <div>
-              <label className="text-xs text-gray-500">Role</label>
-              <select className="w-full border rounded-lg px-3 py-2">
-                <option>Student</option>
-                <option>Instructor</option>
-                <option>Admin</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="text-xs text-gray-500">Status</label>
-              <select className="w-full border rounded-lg px-3 py-2">
-                <option>Active</option>
-                <option>Suspended</option>
-              </select>
-            </div>
-          </div>
-        </Modal>
-      )}
+      <UserFormModal
+        open={openModal}
+        user={editingUser}
+        onClose={() => setOpenModal(false)}
+        onSubmit={handleSubmit}
+      />
     </div>
   );
 }
