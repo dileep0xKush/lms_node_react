@@ -1,18 +1,23 @@
-import { Router } from "express";
+import { Router } from 'express';
+import { create, findAll, findOne, update, remove } from './permission.controller';
+import { validate } from '../../common/middlewares/validate';
 import {
-  create,
-  findAll,
-  findOne,
-  update,
-  remove,
-} from "./permission.controller";
+  createPermissionSchema,
+  updatePermissionSchema,
+  permissionIdParamSchema,
+} from './permission.validation';
 
 const router = Router();
 
-router.post("/", create);
-router.get("/", findAll);
-router.get("/:id", findOne);
-router.put("/:id", update);
-router.delete("/:id", remove);
+router.post('/', validate(createPermissionSchema), create);
+router.get('/', findAll);
+router.get('/:id', validate(permissionIdParamSchema, 'params'), findOne);
+router.put(
+  '/:id',
+  validate(permissionIdParamSchema, 'params'),
+  validate(updatePermissionSchema),
+  update,
+);
+router.delete('/:id', validate(permissionIdParamSchema, 'params'), remove);
 
 export default router;

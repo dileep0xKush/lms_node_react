@@ -1,5 +1,5 @@
-import { RolePermissionModel } from "./role-permission.model";
-import { AssignRolePermissionDto } from "./role-permission.dto";
+import { RolePermissionModel } from './role-permission.model';
+import { AssignRolePermissionDto } from './role-permission.dto';
 
 export const RolePermissionService = {
   async create(dto: AssignRolePermissionDto) {
@@ -11,10 +11,10 @@ export const RolePermissionService = {
   },
 
   async findAll(roleId: string) {
-    return await RolePermissionModel.find({ roleId }).populate("permissionId");
+    return await RolePermissionModel.find({ roleId }).populate('permissionId');
   },
 
   async findOne(permissionId: string) {
-    return await RolePermissionModel.find({ permissionId }).populate("roleId");
+    return await RolePermissionModel.find({ permissionId }).populate('roleId');
   },
 };

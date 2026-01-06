@@ -1,5 +1,5 @@
-import mongoose, { Schema } from "mongoose";
-import { IUser } from "./user.interface";
+import mongoose, { Schema } from 'mongoose';
+import { IUser } from './user.interface';
 
 const UserSchema = new Schema<IUser>(
   {
@@ -16,7 +16,7 @@ const UserSchema = new Schema<IUser>(
     resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-export const UserModel = mongoose.model<IUser>("User", UserSchema);
+export const UserModel = mongoose.model<IUser>('User', UserSchema);

@@ -1,5 +1,5 @@
-import { PermissionModel } from "./permission.model";
-import { CreatePermissionDto, UpdatePermissionDto } from "./permission.dto";
+import { PermissionModel } from './permission.model';
+import { CreatePermissionDto, UpdatePermissionDto } from './permission.dto';
 
 export const PermissionService = {
   async create(dto: CreatePermissionDto) {

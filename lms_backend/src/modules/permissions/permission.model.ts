@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose";
-import { Permission } from "./permission.interface";
+import { Schema, model } from 'mongoose';
+import { Permission } from './permission.interface';
 
 const PermissionSchema = new Schema<Permission>(
   {
@@ -11,16 +11,13 @@ const PermissionSchema = new Schema<Permission>(
     },
     description: {
       type: String,
-      default: "",
+      default: '',
     },
   },
   {
     timestamps: true,
     versionKey: false,
-  }
+  },
 );
 
-export const PermissionModel = model<Permission>(
-  "Permission",
-  PermissionSchema
-);
+export const PermissionModel = model<Permission>('Permission', PermissionSchema);

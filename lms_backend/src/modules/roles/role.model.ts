@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose";
-import { Role } from "./role.interface";
+import { Schema, model } from 'mongoose';
+import { Role } from './role.interface';
 
 const RoleSchema = new Schema<Role>(
   {
@@ -11,13 +11,13 @@ const RoleSchema = new Schema<Role>(
     },
     description: {
       type: String,
-      default: "",
+      default: '',
     },
   },
   {
     timestamps: true,
     versionKey: false,
-  }
+  },
 );
 
-export const RoleModel = model<Role>("Role", RoleSchema);
+export const RoleModel = model<Role>('Role', RoleSchema);

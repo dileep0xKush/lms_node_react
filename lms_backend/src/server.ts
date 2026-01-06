@@ -1,6 +1,6 @@
-import "dotenv/config";
-import { connectDB } from "../config/database";
-import { createServer } from "./app";
+import 'dotenv/config';
+import { connectDB } from '../config/database';
+import { createServer } from './app';
 
 async function bootstrap() {
   await connectDB();

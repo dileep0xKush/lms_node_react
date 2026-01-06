@@ -1,5 +1,5 @@
-import { RoleModel } from "./role.model";
-import { CreateRoleDto, UpdateRoleDto } from "./role.dto";
+import { RoleModel } from './role.model';
+import { CreateRoleDto, UpdateRoleDto } from './role.dto';
 
 export const RoleService = {
   async create(dto: CreateRoleDto) {

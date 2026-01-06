@@ -1,10 +1,10 @@
-import { Document } from "mongoose";
+import { Document } from 'mongoose';
 
 export interface IUser extends Document {
   name: string | null;
   email: string | null;
   password: string;
-  role: "user" | "admin" | null;
+  role: 'user' | 'admin' | null;
   isActive: boolean | null;
   createdAt: Date | null;
   updatedAt: Date | null;

@@ -1,21 +1,16 @@
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import crypto from "crypto";
-import { UserModel } from "../users/user.model";
-import {
-  RegisterDTO,
-  LoginDTO,
-  ForgotPasswordDTO,
-  ResetPasswordDTO,
-} from "./auth.interface";
-import { mailService } from "../../common/mail/mail.service";
-const JWT_SECRET = process.env.JWT_SECRET || "secret";
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
+import { UserModel } from '../users/user.model';
+import { RegisterDTO, LoginDTO, ForgotPasswordDTO, ResetPasswordDTO } from './auth.interface';
+import { mailService } from '../../common/mail/mail.service';
+const JWT_SECRET = process.env.JWT_SECRET || 'secret';
 
 export const AuthService = {
   async register(dto: RegisterDTO): Promise<string> {
     const existing = await UserModel.findOne({ email: dto.email });
     if (existing) {
-      throw new Error("Email already exists");
+      throw new Error('Email already exists');
     }
 
     const hash = await bcrypt.hash(dto.password, 10);
@@ -30,17 +25,15 @@ export const AuthService = {
   },
 
   async login(dto: LoginDTO): Promise<string> {
-    const user = await UserModel.findOne({ email: dto.email }).select(
-      "+password"
-    );
+    const user = await UserModel.findOne({ email: dto.email }).select('+password');
 
     if (!user) {
-      throw new Error("Invalid credentials");
+      throw new Error('Invalid credentials');
     }
 
     const match = await bcrypt.compare(dto.password, user.password);
     if (!match) {
-      throw new Error("Invalid credentials");
+      throw new Error('Invalid credentials');
     }
 
     return this.generateToken(user.id);
@@ -50,10 +43,10 @@ export const AuthService = {
     const user = await UserModel.findOne({ email: dto.email });
 
     if (!user) {
-      throw new Error("User not found");
+      throw new Error('User not found');
     }
 
-    const token = crypto.randomBytes(32).toString("hex");
+    const token = crypto.randomBytes(32).toString('hex');
 
     user.resetPasswordToken = token;
     user.resetPasswordExpires = new Date(Date.now() + 15 * 60 * 1000);
@@ -63,7 +56,7 @@ export const AuthService = {
     const resetUrl = `${process.env.CLIENT_URL}/reset-password?token=${token}`;
 
     if (!user.email) {
-      throw new Error("User email is missing");
+      throw new Error('User email is missing');
     }
     await mailService.sendPasswordResetEmail(user.email, resetUrl);
 
@@ -77,12 +70,12 @@ export const AuthService = {
     });
 
     if (!user) {
-      throw new Error("Invalid or expired token");
+      throw new Error('Invalid or expired token');
     }
 
     user.password = await bcrypt.hash(dto.password, 10);
 
-    user.resetPasswordToken = "";
+    user.resetPasswordToken = '';
     user.resetPasswordExpires = new Date(0);
 
     await user.save();
@@ -91,10 +84,10 @@ export const AuthService = {
   },
 
   async getUserById(id: string) {
-    return UserModel.findById(id).select("-password");
+    return UserModel.findById(id).select('-password');
   },
 
   generateToken(id: string): string {
-    return jwt.sign({ id }, JWT_SECRET, { expiresIn: "7d" });
+    return jwt.sign({ id }, JWT_SECRET, { expiresIn: '7d' });
   },
 };

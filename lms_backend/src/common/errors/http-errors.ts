@@ -1,13 +1,13 @@
-import { HttpException } from "./http-exception";
+import { HttpException } from './http-exception';
 
 export class BadRequestException extends HttpException {
-  constructor(message = "Bad request") {
+  constructor(message = 'Bad request') {
     super(message, 400);
   }
 }
 
 export class NotFoundException extends HttpException {
-  constructor(message = "Resource not found") {
+  constructor(message = 'Resource not found') {
     super(message, 404);
   }
 }
