@@ -12,9 +12,9 @@
  *     Role:
  *       type: object
  *       properties:
- *         id:
+ *         _id:
  *           type: string
- *           example: 9f3a2c0a-1f45-4c21-8e4a-9d4c8c2f1a22
+ *           example: 66b2d44a29f81ab9e3c91234
  *         name:
  *           type: string
  *           example: Admin
@@ -51,6 +51,43 @@
  *   get:
  *     summary: Get all roles
  *     tags: [Roles]
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         description: Page number (pagination applies only if both page & limit are provided)
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           example:
+ *
+ *       - in: query
+ *         name: limit
+ *         description: Number of items per page (pagination applies only if both page & limit are provided)
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           maximum: 100
+ *           example:
+ *
+ *       - in: query
+ *         name: sortBy
+ *         description: Field to sort by
+ *         required: false
+ *         schema:
+ *           type: string
+ *           example: createdAt
+ *
+ *       - in: query
+ *         name: sortOrder
+ *         description: Sort direction
+ *         required: false
+ *         schema:
+ *           type: string
+ *           enum: [asc, desc]
+ *           example: desc
+ *
  *     responses:
  *       200:
  *         description: Roles fetched successfully
@@ -62,13 +99,18 @@
  *                 success:
  *                   type: boolean
  *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: Roles fetched successfully
  *                 data:
  *                   type: object
  *                   properties:
- *                     roles:
+ *                     data:
  *                       type: array
  *                       items:
  *                         $ref: '#/components/schemas/Role'
+ *                     pagination:
+ *                       $ref: '#/components/schemas/Pagination'
  *
  *   post:
  *     summary: Create a new role
@@ -90,6 +132,9 @@
  *                 success:
  *                   type: boolean
  *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: Role created successfully
  *                 data:
  *                   type: object
  *                   properties:
@@ -115,7 +160,16 @@
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Role'
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     role:
+ *                       $ref: '#/components/schemas/Role'
  *       404:
  *         description: Role not found
  *

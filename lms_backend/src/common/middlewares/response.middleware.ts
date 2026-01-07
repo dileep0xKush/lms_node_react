@@ -2,8 +2,8 @@ import { Response, Request, NextFunction } from 'express';
 
 export interface ApiResponseBase {
   success: boolean;
-  message?: string;
   statusCode: number;
+  message?: string;
 }
 
 export interface ApiSuccessResponse<T> extends ApiResponseBase {
@@ -23,8 +23,8 @@ export function responseHandler(_req: Request, res: Response, next: NextFunction
     const response: ApiSuccessResponse<T> = {
       success: true,
       message,
-      data,
       statusCode,
+      data,
     };
 
     return res.status(statusCode).json(response);

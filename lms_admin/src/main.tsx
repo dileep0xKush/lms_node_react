@@ -1,4 +1,4 @@
-import { StrictMode } from 'react';
+// import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
@@ -8,14 +8,14 @@ import { AuthProvider } from './context/AuthContext';
 import GlobalLoader from './components/GlobalLoader';
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <LoaderProvider>
-      <AuthProvider>
-        <ToastProvider>
-          <App />
-          <GlobalLoader />
-        </ToastProvider>
-      </AuthProvider>
-    </LoaderProvider>
-  </StrictMode>,
+  // <StrictMode>
+  <LoaderProvider>
+    <AuthProvider>
+      <ToastProvider>
+        <App />
+        <GlobalLoader />
+      </ToastProvider>
+    </AuthProvider>
+  </LoaderProvider>,
+  // </StrictMode>,
 );

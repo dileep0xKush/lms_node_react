@@ -1,7 +1,7 @@
 export interface ApiResponseBase {
   success: boolean;
-  message?: string;
   statusCode: number;
+  message?: string;
 }
 
 export interface ApiSuccessResponse<T> extends ApiResponseBase {
@@ -12,4 +12,15 @@ export interface ApiSuccessResponse<T> extends ApiResponseBase {
 export interface ApiErrorResponse<E> extends ApiResponseBase {
   success: false;
   error?: E;
+}
+
+export interface Pagination {
+  page: number;
+  limit: number;
+  total: number;
+}
+
+export interface PaginatedResponse<T> {
+  data: T[];
+  pagination: Pagination;
 }

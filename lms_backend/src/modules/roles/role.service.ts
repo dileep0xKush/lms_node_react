@@ -1,13 +1,27 @@
 import { RoleModel } from './role.model';
 import { CreateRoleDto, UpdateRoleDto } from './role.dto';
+import {
+  PaginationOptions,
+  applyPagination,
+  PaginationResponse,
+} from '../../common/helpers/pagination.helper';
 
 export const RoleService = {
   async create(dto: CreateRoleDto) {
     return await RoleModel.create(dto);
   },
 
-  async findAll() {
-    return await RoleModel.find();
+  async findAll(pagination: PaginationOptions) {
+    const { data, total } = await applyPagination(RoleModel, pagination);
+
+    if (pagination.isPaginated) {
+      return {
+        data,
+        pagination: PaginationResponse(total, pagination),
+      };
+    }
+
+    return { data };
   },
 
   async findOne(id: string) {

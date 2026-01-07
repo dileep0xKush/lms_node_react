@@ -45,3 +45,15 @@ export const http = {
     request<TResponse, TBody>('PATCH', url, body),
   delete: <TResponse>(url: string) => request<TResponse>('DELETE', url),
 };
+
+export function buildQuery(params: Record<string, unknown>) {
+  const q = new URLSearchParams();
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null) {
+      q.append(key, String(value));
+    }
+  });
+
+  return `?${q.toString()}`;
+}

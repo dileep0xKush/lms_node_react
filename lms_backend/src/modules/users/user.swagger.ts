@@ -71,6 +71,89 @@
  *           type: boolean
  *           example: false
  */
+/**
+ * @swagger
+ * /users:
+ *   get:
+ *     summary: Get all users
+ *     tags: [Users]
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         description: Page number
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           example: 1
+ *
+ *       - in: query
+ *         name: limit
+ *         description: Number of items per page
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           maximum: 100
+ *           example: 10
+ *
+ *       - in: query
+ *         name: sortBy
+ *         description: Field to sort by
+ *         required: false
+ *         schema:
+ *           type: string
+ *           example: createdAt
+ *
+ *       - in: query
+ *         name: sortOrder
+ *         description: Sort direction
+ *         required: false
+ *         schema:
+ *           type: string
+ *           enum: [asc, desc]
+ *           example: desc
+ *
+ *       - in: query
+ *         name: isActive
+ *         description: Filter users by active status
+ *         required: false
+ *         schema:
+ *           type: boolean
+ *           example: true
+ *
+ *       - in: query
+ *         name: search
+ *         description: Search users by name or email
+ *         required: false
+ *         schema:
+ *           type: string
+ *           example: john
+ *
+ *     responses:
+ *       200:
+ *         description: Users fetched successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: Users fetched successfully
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     users:
+ *                       type: array
+ *                       items:
+ *                         $ref: '#/components/schemas/User'
+ *                     pagination:
+ *                       $ref: '#/components/schemas/Pagination'
+ */
 
 /**
  * @swagger
@@ -103,27 +186,6 @@
  *                       $ref: '#/components/schemas/User'
  *       400:
  *         description: Bad request
- *
- *   get:
- *     summary: Get all users
- *     tags: [Users]
- *     responses:
- *       200:
- *         description: Users fetched successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                 data:
- *                   type: object
- *                   properties:
- *                     users:
- *                       type: array
- *                       items:
- *                         $ref: '#/components/schemas/User'
  */
 
 /**

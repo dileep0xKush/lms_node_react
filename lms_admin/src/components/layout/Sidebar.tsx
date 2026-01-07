@@ -1,6 +1,11 @@
 import { NavLink } from 'react-router-dom';
 import { FiHome, FiUsers } from 'react-icons/fi';
 
+const navItems = [
+  { to: '/dashboard', label: 'Dashboard', icon: FiHome },
+  { to: '/users', label: 'Users', icon: FiUsers },
+];
+
 export default function Sidebar() {
   const linkBase =
     'flex items-center gap-3 px-4 py-2 rounded-xl font-medium transition-all duration-300';
@@ -18,41 +23,28 @@ export default function Sidebar() {
 
       {/* Nav */}
       <nav className="mt-4 px-3 space-y-1">
-        {/* Dashboard */}
-        <NavLink
-          to="/dashboard"
-          className={({ isActive }) =>
-            `${linkBase}
-             group hover:bg-gray-800/60 hover:text-white
-             ${isActive ? 'bg-gray-800 text-white shadow-inner' : ''}`
-          }
-        >
-          <span
-            className={`w-1.5 h-6 rounded-full ${
-              location.pathname === '/' ? 'bg-blue-500' : 'bg-transparent'
-            }`}
-          />
-          <FiHome className="text-lg" />
-          Dashboard
-        </NavLink>
-
-        {/* Users */}
-        <NavLink
-          to="/users"
-          className={({ isActive }) =>
-            `${linkBase}
-             group hover:bg-gray-800/60 hover:text-white
-             ${isActive ? 'bg-gray-800 text-white shadow-inner' : ''}`
-          }
-        >
-          <span
-            className={`w-1.5 h-6 rounded-full ${
-              location.pathname === '/users' ? 'bg-blue-500' : 'bg-transparent'
-            }`}
-          />
-          <FiUsers className="text-lg" />
-          Users
-        </NavLink>
+        {navItems.map(({ to, label, icon: Icon }) => (
+          <NavLink
+            key={to}
+            to={to}
+            className={({ isActive }) =>
+              `${linkBase} group hover:bg-gray-800/60 hover:text-white
+               ${isActive ? 'bg-gray-800 text-white shadow-inner' : ''}`
+            }
+          >
+            {({ isActive }) => (
+              <>
+                <span
+                  className={`w-1.5 h-6 rounded-full ${
+                    isActive ? 'bg-blue-500' : 'bg-transparent'
+                  }`}
+                />
+                <Icon className="text-lg" />
+                {label}
+              </>
+            )}
+          </NavLink>
+        ))}
       </nav>
 
       {/* Footer */}

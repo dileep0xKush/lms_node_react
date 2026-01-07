@@ -2,6 +2,11 @@ import { UserModel } from './user.model';
 import { CreateUserDto } from './user.dto';
 import { NotFoundException } from '../../common/errors/http-errors';
 import { RoleUserModel } from '../role-user/role-user.model';
+import {
+  PaginationOptions,
+  PaginationResponse,
+  applyPagination,
+} from '../../common/helpers/pagination.helper';
 
 export async function create(data: CreateUserDto) {
   const existing = await UserModel.findOne({ email: data.email });
@@ -19,8 +24,19 @@ export async function create(data: CreateUserDto) {
   return user;
 }
 
-export async function findAll() {
-  return await UserModel.find();
+export async function findAll(pagination: PaginationOptions) {
+  const { data, total } = await applyPagination(UserModel, pagination);
+
+  if (pagination.isPaginated) {
+    return {
+      users: data,
+      pagination: PaginationResponse(total, pagination),
+    };
+  }
+
+  return {
+    users: data,
+  };
 }
 
 export async function findOne(id: string) {
