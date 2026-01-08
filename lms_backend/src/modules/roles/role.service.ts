@@ -16,12 +16,12 @@ export const RoleService = {
 
     if (pagination.isPaginated) {
       return {
-        data,
+        role: data,
         pagination: PaginationResponse(total, pagination),
       };
     }
 
-    return { data };
+    return { role: data };
   },
 
   async findOne(id: string) {

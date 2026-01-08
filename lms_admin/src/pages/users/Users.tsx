@@ -25,7 +25,9 @@ export default function Users() {
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
-  const [sortBy, setSortBy] = useState<'name' | 'email' | 'role' | 'isActive' | 'createdAt'>('createdAt');
+  const [sortBy, setSortBy] = useState<'name' | 'email' | 'role' | 'isActive' | 'createdAt'>(
+    'createdAt',
+  );
   const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
   const [search, setSearch] = useState('');
 
@@ -39,14 +41,17 @@ export default function Users() {
       abortRef.current?.abort();
       abortRef.current = new AbortController();
 
-      const res = await getUsersApi({
-        page,
-        limit: pageSize,
-        sortBy,
-        sortOrder,
-        isActive: true,
-        search,
-      });
+      const res = await getUsersApi(
+        {
+          page,
+          limit: pageSize,
+          sortBy,
+          sortOrder,
+          isActive: true,
+          search,
+        },
+        { signal: abortRef.current.signal },
+      );
 
       const list = (res?.data?.users ?? []) as ApiUser[];
       const mapped: User[] = list.map((u: ApiUser) => ({
@@ -90,7 +95,7 @@ export default function Users() {
   return (
     <div className="space-y-6">
       {/* Card + Toolbar */}
-      <div className="bg-white rounded-2xl shadow-md ring-1 ring-black/5 overflow-hidden">
+      <div className="bg-white rounded-lg shadow-md ring-1 ring-black/5 overflow-hidden">
         <div className="flex items-center justify-between px-5 py-3 border-b border-gray-100">
           <div>
             <h2 className="text-lg font-semibold">User Management</h2>

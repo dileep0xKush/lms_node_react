@@ -24,14 +24,17 @@ export type GetUsersApiResult = {
   };
 };
 
-export function getUsersApi(options?: {
+export function getUsersApi(
+  options?: {
   page?: number;
   limit?: number;
   sortBy?: string;
   sortOrder?: 'asc' | 'desc';
   isActive?: boolean;
   search?: string;
-}) {
+  },
+  reqOptions?: { signal?: AbortSignal },
+) {
   const query = buildQuery({
     page: options?.page ?? 1,
     limit: options?.limit ?? 5,
@@ -41,5 +44,5 @@ export function getUsersApi(options?: {
     search: options?.search,
   });
 
-  return http.get<GetUsersApiResult>(`/users${query}`);
+  return http.get<GetUsersApiResult>(`/users${query}`, reqOptions);
 }
