@@ -15,38 +15,56 @@ export default function Pagination({ page, totalPages, onChange }: PaginationPro
     onChange(p);
   };
 
+  const baseBtn = 'min-w-[36px] h-9 px-3 rounded-lg text-sm font-medium transition';
+
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-1">
       {/* Prev */}
       <button
         onClick={() => goTo(page - 1)}
         disabled={page === 1}
-        className="px-3 py-1.5 rounded-xl bg-gray-100 hover:bg-gray-200 disabled:opacity-40 disabled:pointer-events-none"
+        className={`
+          ${baseBtn}
+          bg-gray-100 text-gray-700
+          hover:bg-gray-200
+          disabled:opacity-40 disabled:cursor-not-allowed
+        `}
       >
         Prev
       </button>
 
-      {/* Page Numbers */}
-      {pages.map((p) => (
-        <button
-          key={p}
-          onClick={() => goTo(p)}
-          className={`px-3 py-1.5 rounded-xl border transition
-          ${
-            p === page
-              ? 'bg-blue-600 text-white border-blue-600'
-              : 'bg-white hover:bg-gray-100 border-gray-200'
-          }`}
-        >
-          {p}
-        </button>
-      ))}
+      {/* Page numbers */}
+      <div className="flex items-center gap-1">
+        {pages.map((p) => (
+          <button
+            key={p}
+            onClick={() => goTo(p)}
+            aria-current={p === page ? 'page' : undefined}
+            className={`
+              ${baseBtn}
+              border
+              ${
+                p === page
+                  ? 'bg-blue-600 text-white border-blue-600 shadow-sm'
+                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-100'
+              }
+            `}
+          >
+            {p}
+          </button>
+        ))}
+      </div>
 
       {/* Next */}
       <button
         onClick={() => goTo(page + 1)}
         disabled={page === totalPages}
-        className="px-3 py-1.5 rounded-xl bg-gray-100 hover:bg-gray-200 disabled:opacity-40 disabled:pointer-events-none"
+        className={`
+          ${baseBtn}
+          bg-gray-100 text-gray-700
+          hover:bg-gray-200
+          disabled:opacity-40 disabled:cursor-not-allowed
+        `}
       >
         Next
       </button>

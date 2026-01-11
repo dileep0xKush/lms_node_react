@@ -1,214 +1,192 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FiUserPlus, FiUser } from 'react-icons/fi';
 
 import Table from '../../components/Table';
 import Pagination from '../../components/Pagination';
 import UserActionsDropdown from '../../components/UserActionsDropdown';
-import UserFormModal, { type UserForm } from './UserFormModal';
-import { getUsersApi, type ApiUser } from '../../services/userService';
+import UserFormModal from './UserFormModal';
+import ConfirmDialog from '../../components/ConfirmDialog';
+import { getUsersApi, createUser, updateUser, deleteUser } from '../../services/userService';
 import { useToast } from '../../components/toast/useToast';
 import { usePagination } from '../../hooks/usePagination';
 import PageSizeSelect from '../../components/PageSizeSelect';
-
-type User = UserForm & {
-  _id: string;
-  status: string;
-  role: string;
-};
+import type { UserForm } from '../../types/user';
+import { display } from '../../utils/display';
+import Button from '../../components/Button';
 
 type SortOrder = 'asc' | 'desc';
+type User = UserForm & { _id: string };
 
 export default function Users() {
   const { showToast } = useToast();
 
-  const [openModal, setOpenModal] = useState(false);
-  const [editingUser, setEditingUser] = useState<User | null>(null);
-  const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [sortBy, setSortBy] = useState<'name' | 'email' | 'role' | 'isActive' | 'createdAt'>(
-    'createdAt',
-  );
-  const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
-  const [search, setSearch] = useState('');
+  const [modalUser, setModalUser] = useState<User | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<User | null>(null);
+  const [deleting, setDeleting] = useState(false);
 
-  const abortRef = useRef<AbortController | null>(null);
+  const [users, setUsers] = useState<User[]>([]);
+  const [search, setSearch] = useState('');
+  const [sortBy, setSortBy] = useState<'name' | 'email' | 'role' | 'createdAt'>('createdAt');
+  const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
 
   const { page, pageSize, totalPages, setPage, setPageSize, setTotal } = usePagination();
 
   const fetchUsers = async () => {
     try {
-      setLoading(true);
-      abortRef.current?.abort();
-      abortRef.current = new AbortController();
+      const res = await getUsersApi({
+        page,
+        limit: pageSize,
+        sortBy,
+        sortOrder,
+        search,
+      });
 
-      const res = await getUsersApi(
-        {
-          page,
-          limit: pageSize,
-          sortBy,
-          sortOrder,
-          isActive: true,
-          search,
-        },
-        { signal: abortRef.current.signal },
+      const list = res.data.users ?? [];
+      setUsers(
+        list.map((u) => ({
+          _id: u._id,
+          name: u.name,
+          email: u.email,
+          role: u.role ?? '',
+          status: u.isActive ? 'Active' : 'Suspended',
+        })),
       );
 
-      const list = (res?.data?.users ?? []) as ApiUser[];
-      const mapped: User[] = list.map((u: ApiUser) => ({
-        _id: u._id,
-        name: u.name ?? '',
-        email: u.email ?? '',
-        role: u.role === 'admin' ? 'Admin' : u.role === 'instructor' ? 'Instructor' : 'Student',
-        status: u.isActive ? 'Active' : 'Suspended',
-      }));
-
-      setUsers(mapped);
-      setTotal(res?.data?.pagination?.total ?? mapped.length ?? 0);
-    } catch (err) {
-      if ((err as Error)?.name === 'AbortError') return;
-      showToast(err instanceof Error ? err.message : 'Failed to load users', 'error');
-    } finally {
-      setLoading(false);
+      setTotal(res.data.pagination.total);
+    } catch {
+      showToast('Failed to load users', 'error');
     }
   };
 
   useEffect(() => {
     fetchUsers();
-    return () => abortRef.current?.abort();
   }, [page, pageSize, sortBy, sortOrder, search]);
 
-  const openEdit = (user: User) => {
-    setEditingUser(user);
-    setOpenModal(true);
+  const handleSubmit = async (data: UserForm) => {
+    try {
+      const payload = {
+        name: data.name,
+        email: data.email,
+        roleId: data.role,
+        ...(data.password ? { password: data.password } : {}),
+      };
+
+      data._id ? await updateUser(data._id, payload) : await createUser(payload);
+
+      showToast(data._id ? 'User updated successfully' : 'User created successfully', 'success');
+
+      setModalUser(null);
+      fetchUsers();
+    } catch {
+      showToast('Failed to save user', 'error');
+    }
   };
 
-  const openCreate = () => {
-    setEditingUser(null);
-    setOpenModal(true);
-  };
+  const confirmDelete = async () => {
+    if (!deleteTarget) return;
 
-  const handleSubmit = async () => {
-    setOpenModal(false);
-    await fetchUsers();
+    try {
+      setDeleting(true);
+      await deleteUser(deleteTarget._id);
+      showToast('User deleted successfully', 'success');
+      setDeleteTarget(null);
+      fetchUsers();
+    } catch {
+      showToast('Failed to delete user', 'error');
+    } finally {
+      setDeleting(false);
+    }
   };
 
   return (
-    <div className="space-y-6">
-      {/* Card + Toolbar */}
-      <div className="bg-white rounded-lg shadow-md ring-1 ring-black/5 overflow-hidden">
-        <div className="flex items-center justify-between px-5 py-3 border-b border-gray-100">
-          <div>
+    <>
+      <div className="space-y-6">
+        <div className="bg-white rounded-lg shadow-md">
+          {/* Toolbar */}
+          <div className="flex justify-between p-4">
             <h2 className="text-lg font-semibold">User Management</h2>
-            <p className="text-sm text-gray-500 mt-0.5">Manage platform users and access levels</p>
+
+            <div className="flex gap-3">
+              <input
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  setPage(1);
+                }}
+                placeholder="Search..."
+                className="border rounded-lg px-3 py-2 text-sm"
+              />
+
+              <Button onClick={() => setModalUser({} as User)}>
+                <FiUserPlus />
+                Add User
+              </Button>
+            </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
-                setPage(1);
-              }}
-              placeholder="Search..."
-              className="w-64 rounded-xl border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+          <Table
+            headers={[
+              { key: 'name', label: 'User', sortable: true, width: '30%' },
+              { key: 'email', label: 'Email', sortable: true, width: '40%' },
+              { key: 'role', label: 'Role', sortable: true, width: '20%' },
+              { key: 'actions', label: 'Actions', width: '10%' },
+            ]}
+            sortBy={sortBy}
+            sortOrder={sortOrder}
+            isEmpty={users.length === 0}
+            onSortChange={(key, order) => {
+              if (key === 'actions') return;
+              setSortBy(key as typeof sortBy);
+              setSortOrder(order);
+              setPage(1);
+            }}
+          >
+            {users.map((u) => (
+              <tr key={u._id} className="hover:bg-gray-50 transition-colors">
+                <td className="px-4 py-3 flex gap-2 items-center">
+                  <FiUser /> {display(u.name)}
+                </td>
+                <td className="px-4 py-3">{display(u.email)}</td>
+                <td className="px-4 py-3">{display(u.role)}</td>
+                <td className="px-4 py-3 text-right">
+                  <UserActionsDropdown
+                    onEdit={() => setModalUser(u)}
+                    onDelete={() => setDeleteTarget(u)}
+                  />
+                </td>
+              </tr>
+            ))}
+          </Table>
 
-            <button
-              onClick={openCreate}
-              className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 active:scale-[.98] shadow-sm transition"
-            >
-              <FiUserPlus /> Add User
-            </button>
-          </div>
-        </div>
-
-        {/* Table */}
-        <Table
-          headers={[
-            { key: 'name', label: 'User', sortable: true },
-            { key: 'email', label: 'Email', sortable: true },
-            { key: 'role', label: 'Role', sortable: true },
-            { key: 'isActive', label: 'Status', sortable: true },
-            { key: 'actions', label: '' },
-          ]}
-          isEmpty={!loading && users.length === 0}
-          sortBy={sortBy}
-          sortOrder={sortOrder}
-          onSortChange={(key, order) => {
-            if (key === 'actions') return;
-            setSortBy(key as typeof sortBy);
-            setSortOrder(order as SortOrder);
-            setPage(1);
-          }}
-        >
-          {users.map((u) => (
-            <tr key={u._id} className="hover:bg-gray-50 transition-all duration-150">
-              <td className="px-5 py-3 flex items-center gap-3">
-                <span className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center">
-                  <FiUser className="text-gray-500" />
-                </span>
-                <span className="font-medium">{u.name}</span>
-              </td>
-
-              <td className="px-5 py-3 text-gray-700">{u.email}</td>
-
-              <td className="px-5 py-3">
-                <span className="px-3 py-1 rounded-full text-blue-600 bg-blue-50 text-xs font-medium">
-                  {u.role}
-                </span>
-              </td>
-
-              <td className="px-5 py-3">
-                <span
-                  className={`px-3 py-1 rounded-full text-xs font-medium ${
-                    u.status === 'Active'
-                      ? 'bg-green-50 text-green-600'
-                      : 'bg-rose-50 text-rose-600'
-                  }`}
-                >
-                  {u.status}
-                </span>
-              </td>
-
-              <td className="px-4 py-3 text-right">
-                <UserActionsDropdown
-                  onEdit={() => openEdit(u)}
-                  onDelete={() => console.log('Delete', u._id)}
-                />
-              </td>
-            </tr>
-          ))}
-        </Table>
-
-        {/* Footer */}
-        <div className="flex items-center justify-between px-5 py-3 bg-gray-50">
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-gray-500">
-              Page {page} of {totalPages}
-            </span>
-
+          <div className="flex justify-between p-4">
             <PageSizeSelect
               value={pageSize}
               options={[5, 10, 20]}
               onChange={(v) => {
-                setPage(1);
                 setPageSize(v);
+                setPage(1);
               }}
             />
+            <Pagination page={page} totalPages={totalPages} onChange={setPage} />
           </div>
-
-          <Pagination page={page} totalPages={totalPages} onChange={setPage} />
         </div>
+
+        <UserFormModal
+          open={!!modalUser}
+          user={modalUser && modalUser._id ? modalUser : null}
+          onClose={() => setModalUser(null)}
+          onSubmit={handleSubmit}
+        />
       </div>
 
-      {/* Modal */}
-      <UserFormModal
-        open={openModal}
-        user={editingUser}
-        onClose={() => setOpenModal(false)}
-        onSubmit={handleSubmit}
+      <ConfirmDialog
+        open={!!deleteTarget}
+        title="Delete User"
+        message={`Are you sure you want to delete "${deleteTarget?.name}"?`}
+        onClose={() => setDeleteTarget(null)}
+        onConfirm={confirmDelete}
+        loading={deleting}
       />
-    </div>
+    </>
   );
 }

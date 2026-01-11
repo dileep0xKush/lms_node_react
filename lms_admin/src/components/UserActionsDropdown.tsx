@@ -1,35 +1,32 @@
-import { FiEdit2, FiTrash2, FiMoreVertical } from 'react-icons/fi';
-import Dropdown from './Dropdown';
+import { FiEdit2, FiTrash2 } from 'react-icons/fi';
 
 type Props = {
   onEdit: () => void;
   onDelete: () => void;
 };
 
-export default function UserActionsDropdown({ onEdit, onDelete }: Props) {
+export default function UserActions({ onEdit, onDelete }: Props) {
   return (
-    <Dropdown
-      trigger={
-        <button className="p-2 rounded-lg hover:bg-gray-100">
-          <FiMoreVertical />
-        </button>
-      }
-    >
-      <ul className="text-sm">
-        <li
-          className="px-3 py-2 flex items-center gap-2 hover:bg-gray-100 cursor-pointer"
-          onClick={onEdit}
-        >
-          <FiEdit2 /> Edit
-        </li>
+    <div className="flex items-center justify-end gap-1">
+      {/* Edit */}
+      <button
+        type="button"
+        onClick={onEdit}
+        className="p-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-800"
+        aria-label="Edit user"
+      >
+        <FiEdit2 />
+      </button>
 
-        <li
-          className="px-3 py-2 flex items-center gap-2 text-red-500 hover:bg-red-50 cursor-pointer"
-          onClick={onDelete}
-        >
-          <FiTrash2 /> Delete
-        </li>
-      </ul>
-    </Dropdown>
+      {/* Delete */}
+      <button
+        type="button"
+        onClick={onDelete}
+        className="p-2 rounded-lg text-red-600 hover:bg-red-50"
+        aria-label="Delete user"
+      >
+        <FiTrash2 />
+      </button>
+    </div>
   );
 }

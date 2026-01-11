@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
+
 import PublicLayout from '../../layouts/PublicLayout';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import { FormField } from '../../components/form/FormField';
+
 import { useToast } from '../../components/toast/useToast';
-import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useLoader } from '../../context/LoaderContext';
 import { useAuth } from '../../context/AuthContext';
 import { validators } from '../../utils/validation';
@@ -16,17 +19,14 @@ export default function Login() {
   const { showLoader, hideLoader } = useLoader();
   const { login } = useAuth();
 
+  const [showPass, setShowPass] = useState(false);
+
   useEffect(() => {
     document.title = 'Login — LMS Admin';
   }, []);
 
-  const [showPass, setShowPass] = useState(false);
-
   const { values, errors, handleChange, validateForm } = useFormValidator(
-    {
-      email: '',
-      password: '',
-    },
+    { email: '', password: '' },
     {
       email: [validators.email],
       password: [validators.min(6)],
@@ -38,14 +38,11 @@ export default function Login() {
 
     try {
       showLoader();
-
       await login(values.email, values.password);
-
       showToast('Login successful', 'success');
       navigate('/dashboard', { replace: true });
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Login failed. Please try again.';
-      showToast(message, 'error');
+      showToast(err instanceof Error ? err.message : 'Login failed. Please try again.', 'error');
     } finally {
       hideLoader();
     }
@@ -53,54 +50,68 @@ export default function Login() {
 
   return (
     <PublicLayout>
-      <div className="relative w-full min-h-screen flex items-center justify-center">
+      <div className="relative min-h-screen flex items-center justify-center px-4">
+        {/* Background */}
         <div
-          className="fixed inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: "url('/app_bg_image.avif')" }}
         />
-        <div className="fixed inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-black/60" />
 
-        <div className="relative bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/40 p-6 sm:p-8 w-[95%] max-w-md">
-          <div className="text-center mb-4">
+        {/* Card */}
+        <div className="relative w-full max-w-md bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/40 p-6 sm:p-8">
+          {/* Header */}
+          <div className="text-center mb-6">
             <h2 className="text-2xl font-extrabold tracking-wide">
               LMS <span className="text-blue-600">Admin</span>
             </h2>
-            <p className="text-gray-500 text-sm">Sign in to your dashboard</p>
+            <p className="text-sm text-gray-500 mt-1">Sign in to your dashboard</p>
           </div>
 
-          <div className="space-y-4">
-            <Input
-              label="Email"
-              type="email"
-              value={values.email}
-              onChange={handleChange('email')}
-              error={errors.email}
-            />
+          {/* Form */}
+          <div className="space-y-5">
+            {/* Email */}
+            <FormField label="Email" required error={errors.email}>
+              <Input
+                type="email"
+                value={values.email}
+                onChange={handleChange('email')}
+                placeholder="admin@example.com"
+                error={errors.email}
+              />
+            </FormField>
 
-            <Input
-              label="Password"
-              type={showPass ? 'text' : 'password'}
-              value={values.password}
-              onChange={handleChange('password')}
-              error={errors.password}
-              rightIcon={
-                showPass ? (
-                  <FiEyeOff onClick={() => setShowPass(false)} />
-                ) : (
-                  <FiEye onClick={() => setShowPass(true)} />
-                )
-              }
-            />
+            {/* Password */}
+            <FormField label="Password" required error={errors.password}>
+              <Input
+                type={showPass ? 'text' : 'password'}
+                value={values.password}
+                onChange={handleChange('password')}
+                placeholder="••••••••"
+                error={errors.password}
+                rightIcon={
+                  <button
+                    type="button"
+                    onClick={() => setShowPass((v) => !v)}
+                    className="hover:text-gray-600"
+                  >
+                    {showPass ? <FiEyeOff /> : <FiEye />}
+                  </button>
+                }
+              />
+            </FormField>
 
-            <Button className="w-full mt-1" onClick={handleLogin}>
+            {/* Action */}
+            <Button className="w-full mt-2" onClick={handleLogin}>
               Sign In
             </Button>
 
+            {/* Links */}
             <div className="flex justify-between text-sm pt-2 text-gray-600">
-              <Link to="/forgot" className="hover:text-blue-600">
+              <Link to="/forgot" className="font-medium text-blue-600 hover:text-blue-700">
                 Forgot password?
               </Link>
-              <Link to="/register" className="hover:text-blue-600">
+              <Link to="/register" className="font-medium text-blue-600 hover:text-blue-700">
                 Create account
               </Link>
             </div>

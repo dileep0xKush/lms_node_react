@@ -1,3 +1,5 @@
+import Dropdown from './Dropdown';
+
 type PageSizeSelectProps = {
   value: number;
   onChange: (size: number) => void;
@@ -6,18 +8,26 @@ type PageSizeSelectProps = {
 
 export default function PageSizeSelect({ value, onChange, options }: PageSizeSelectProps) {
   return (
-    <select
-      value={value}
-      onChange={(e) => onChange(Number(e.target.value))}
-      className="rounded-xl border border-gray-300 bg-white px-3 py-1.5 text-sm
-                 shadow-sm hover:bg-gray-50 transition
-                 focus:outline-none focus:ring-2 focus:ring-blue-500"
-    >
-      {options.map((size) => (
-        <option key={size} value={size}>
-          {size} - page
-        </option>
-      ))}
-    </select>
+    <div className="flex items-center gap-3 text-sm">
+
+      <Dropdown value={String(value)} align="left" width={90}>
+        {options.map((size) => (
+          <button
+          key={size}
+          type="button"
+          onClick={() => onChange(size)}
+          className="
+          w-full px-3 py-2 text-left text-sm
+          hover:bg-gray-100
+          transition
+          rounded-md
+          "
+          >
+            {size}
+          </button>
+        ))}
+      </Dropdown>
+        <span className="text-gray-600 font-medium whitespace-nowrap">Rows per page</span>
+    </div>
   );
 }
