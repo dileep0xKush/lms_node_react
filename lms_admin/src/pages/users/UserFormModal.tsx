@@ -11,6 +11,7 @@ import { useRoles } from '../../hooks/useRoles';
 import { validators } from '../../utils/validation';
 
 import type { UserForm } from '../../types/user';
+import { USER_FORM, STATUS, STATUS_LABEL, type StatusValue } from '../../constants/user';
 
 /* -------------------------------------------------------------------------- */
 /* Types                                                                      */
@@ -24,18 +25,6 @@ type Props = {
 };
 
 /* -------------------------------------------------------------------------- */
-/* Constants                                                                  */
-/* -------------------------------------------------------------------------- */
-
-const initialForm: UserForm = {
-  name: '',
-  email: '',
-  password: '',
-  role: '',
-  status: 'Active',
-};
-
-/* -------------------------------------------------------------------------- */
 /* Component                                                                  */
 /* -------------------------------------------------------------------------- */
 
@@ -43,7 +32,7 @@ export default function UserFormModal({ open, user, onClose, onSubmit }: Props) 
   const [showPassword, setShowPassword] = useState(false);
 
   const { values, errors, handleChange, validateForm, setValues, setErrors } =
-    useFormValidator<UserForm>(initialForm, {
+    useFormValidator<UserForm>(USER_FORM.INITIAL_VALUES, {
       name: [validators.required, validators.min(3)],
       email: [validators.email],
       password: user ? [] : [validators.required, validators.min(6)],
@@ -54,7 +43,8 @@ export default function UserFormModal({ open, user, onClose, onSubmit }: Props) 
 
   useEffect(() => {
     if (!open) return;
-    setValues(user ? { ...user, password: '' } : initialForm);
+
+    setValues(user ? { ...user, password: '' } : USER_FORM.INITIAL_VALUES);
     setErrors({});
     setShowPassword(false);
   }, [open, user, setValues, setErrors]);
@@ -67,38 +57,43 @@ export default function UserFormModal({ open, user, onClose, onSubmit }: Props) 
   };
 
   return (
-    <Modal size="xl" title={user ? 'Edit User' : 'Add User'} onClose={onClose} onSubmit={submit}>
+    <Modal
+      size="xl"
+      title={user ? USER_FORM.MODAL_TITLE.EDIT : USER_FORM.MODAL_TITLE.ADD}
+      onClose={onClose}
+      onSubmit={submit}
+    >
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {/* Name */}
-          <FormField label="Full Name" required error={errors.name}>
+          {/* Full Name */}
+          <FormField label={USER_FORM.FIELDS.NAME.LABEL} required error={errors.name}>
             <Input
               value={values.name}
               onChange={handleChange('name')}
-              placeholder="John Doe"
+              placeholder={USER_FORM.FIELDS.NAME.PLACEHOLDER}
               error={errors.name}
             />
           </FormField>
 
           {/* Email */}
-          <FormField label="Email" required error={errors.email}>
+          <FormField label={USER_FORM.FIELDS.EMAIL.LABEL} required error={errors.email}>
             <Input
               type="email"
               value={values.email}
               onChange={handleChange('email')}
-              placeholder="john@example.com"
+              placeholder={USER_FORM.FIELDS.EMAIL.PLACEHOLDER}
               error={errors.email}
             />
           </FormField>
 
           {/* Password */}
           {!user && (
-            <FormField label="Password" required error={errors.password}>
+            <FormField label={USER_FORM.FIELDS.PASSWORD.LABEL} required error={errors.password}>
               <Input
                 type={showPassword ? 'text' : 'password'}
                 value={values.password}
                 onChange={handleChange('password')}
-                placeholder="••••••••"
+                placeholder={USER_FORM.FIELDS.PASSWORD.PLACEHOLDER}
                 error={errors.password}
                 rightIcon={
                   <button
@@ -114,9 +109,11 @@ export default function UserFormModal({ open, user, onClose, onSubmit }: Props) 
           )}
 
           {/* Role */}
-          <FormField label="Role" required error={errors.role}>
+          <FormField label={USER_FORM.FIELDS.ROLE.LABEL} required error={errors.role}>
             <Dropdown
-              value={roles.find((r) => r._id === values.role)?.name || 'Select role'}
+              value={
+                roles.find((r) => r._id === values.role)?.name || USER_FORM.FIELDS.ROLE.PLACEHOLDER
+              }
               error={!!errors.role}
               disabled={loading}
               align="left"
@@ -136,15 +133,15 @@ export default function UserFormModal({ open, user, onClose, onSubmit }: Props) 
           </FormField>
 
           {/* Status */}
-          <FormField label="Status">
-            <Dropdown value={values.status} align="left" searchable maxHeight={220}>
-              {(['Active', 'Suspended'] as const).map((status) => (
+          <FormField label={USER_FORM.FIELDS.STATUS.LABEL}>
+            <Dropdown value={values.status} align="left">
+              {(Object.values(STATUS) as StatusValue[]).map((status) => (
                 <Dropdown.Item
                   key={status}
                   active={values.status === status}
                   onClick={() => setValues((v) => ({ ...v, status }))}
                 >
-                  {status}
+                  {STATUS_LABEL[status]}
                 </Dropdown.Item>
               ))}
             </Dropdown>

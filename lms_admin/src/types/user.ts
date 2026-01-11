@@ -2,7 +2,7 @@
  * Core User Types
  * ---------------------------------- */
 
-export type UserStatus = 'Active' | 'Suspended';
+export type UserStatus = 'active' | 'inactive';
 
 export type UserForm = {
   _id?: string;

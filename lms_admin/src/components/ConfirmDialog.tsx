@@ -25,7 +25,7 @@ export default function ConfirmDialog({
   if (!open) return null;
 
   return (
-    <Modal size="lg" title={title} onClose={onClose} hideFooter>
+    <Modal size="xl" title={title} onClose={onClose} hideFooter>
       <div className="space-y-4">
         {/* Message */}
         <div className="flex gap-3">

@@ -5,31 +5,53 @@ import Table from '../../components/Table';
 import Pagination from '../../components/Pagination';
 import UserActionsDropdown from '../../components/UserActionsDropdown';
 import UserFormModal from './UserFormModal';
+import UserViewModal from './UserViewModal';
 import ConfirmDialog from '../../components/ConfirmDialog';
-import { getUsersApi, createUser, updateUser, deleteUser } from '../../services/userService';
+
+import {
+  getUsersApi,
+  createUser,
+  updateUser,
+  deleteUser,
+  updateUserStatus,
+} from '../../services/userService';
+
 import { useToast } from '../../components/toast/useToast';
 import { usePagination } from '../../hooks/usePagination';
 import PageSizeSelect from '../../components/PageSizeSelect';
+
 import type { UserForm } from '../../types/user';
 import { display } from '../../utils/display';
+
 import Button from '../../components/Button';
+import Status from '../../components/Status';
+
+import { USERS_TEXT, PAGE_SIZE_OPTIONS, type StatusValue } from '../../constants/user';
+import AvatarInitial from '../../components/AvatarInitial';
 
 type SortOrder = 'asc' | 'desc';
-type User = UserForm & { _id: string };
+
+type User = UserForm & {
+  _id: string;
+  status: StatusValue;
+};
 
 export default function Users() {
   const { showToast } = useToast();
 
-  const [modalUser, setModalUser] = useState<User | null>(null);
+  const [users, setUsers] = useState<User[]>([]);
+  const [editUser, setEditUser] = useState<User | null>(null);
+  const [viewUser, setViewUser] = useState<User | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<User | null>(null);
   const [deleting, setDeleting] = useState(false);
 
-  const [users, setUsers] = useState<User[]>([]);
   const [search, setSearch] = useState('');
   const [sortBy, setSortBy] = useState<'name' | 'email' | 'role' | 'createdAt'>('createdAt');
   const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
 
   const { page, pageSize, totalPages, setPage, setPageSize, setTotal } = usePagination();
+
+  /* ---------------- Fetch users ---------------- */
 
   const fetchUsers = async () => {
     try {
@@ -41,26 +63,41 @@ export default function Users() {
         search,
       });
 
-      const list = res.data.users ?? [];
       setUsers(
-        list.map((u) => ({
+        (res.data.users ?? []).map((u) => ({
           _id: u._id,
           name: u.name,
           email: u.email,
           role: u.role ?? '',
-          status: u.isActive ? 'Active' : 'Suspended',
+          status: u.isActive ? 'active' : 'inactive',
         })),
       );
 
       setTotal(res.data.pagination.total);
     } catch {
-      showToast('Failed to load users', 'error');
+      showToast(USERS_TEXT.TOAST.LOAD_ERROR, 'error');
     }
   };
 
   useEffect(() => {
     fetchUsers();
   }, [page, pageSize, sortBy, sortOrder, search]);
+
+  /* ---------------- Status change ---------------- */
+
+  const handleStatusChange = async (userId: string, nextStatus: StatusValue) => {
+    try {
+      await updateUserStatus(userId, nextStatus === 'active');
+
+      setUsers((prev) => prev.map((u) => (u._id === userId ? { ...u, status: nextStatus } : u)));
+
+      showToast(USERS_TEXT.TOAST.STATUS_SUCCESS, 'success');
+    } catch {
+      showToast(USERS_TEXT.TOAST.STATUS_ERROR, 'error');
+    }
+  };
+
+  /* ---------------- Add / Edit ---------------- */
 
   const handleSubmit = async (data: UserForm) => {
     try {
@@ -73,14 +110,15 @@ export default function Users() {
 
       data._id ? await updateUser(data._id, payload) : await createUser(payload);
 
-      showToast(data._id ? 'User updated successfully' : 'User created successfully', 'success');
-
-      setModalUser(null);
+      showToast(USERS_TEXT.TOAST.SAVE_SUCCESS(!!data._id), 'success');
+      setEditUser(null);
       fetchUsers();
     } catch {
-      showToast('Failed to save user', 'error');
+      showToast(USERS_TEXT.TOAST.SAVE_ERROR, 'error');
     }
   };
+
+  /* ---------------- Delete ---------------- */
 
   const confirmDelete = async () => {
     if (!deleteTarget) return;
@@ -88,101 +126,117 @@ export default function Users() {
     try {
       setDeleting(true);
       await deleteUser(deleteTarget._id);
-      showToast('User deleted successfully', 'success');
+      showToast(USERS_TEXT.TOAST.DELETE_SUCCESS, 'success');
       setDeleteTarget(null);
       fetchUsers();
     } catch {
-      showToast('Failed to delete user', 'error');
+      showToast(USERS_TEXT.TOAST.DELETE_ERROR, 'error');
     } finally {
       setDeleting(false);
     }
   };
 
+  /* ---------------- Render ---------------- */
+
   return (
     <>
-      <div className="space-y-6">
-        <div className="bg-white rounded-lg shadow-md">
-          {/* Toolbar */}
-          <div className="flex justify-between p-4">
-            <h2 className="text-lg font-semibold">User Management</h2>
+      <div className="bg-white rounded-lg shadow-md">
+        {/* Toolbar */}
+        <div className="flex justify-between p-4">
+          <h2 className="text-lg font-semibold">{USERS_TEXT.PAGE_TITLE}</h2>
 
-            <div className="flex gap-3">
-              <input
-                value={search}
-                onChange={(e) => {
-                  setSearch(e.target.value);
-                  setPage(1);
-                }}
-                placeholder="Search..."
-                className="border rounded-lg px-3 py-2 text-sm"
-              />
-
-              <Button onClick={() => setModalUser({} as User)}>
-                <FiUserPlus />
-                Add User
-              </Button>
-            </div>
-          </div>
-
-          <Table
-            headers={[
-              { key: 'name', label: 'User', sortable: true, width: '30%' },
-              { key: 'email', label: 'Email', sortable: true, width: '40%' },
-              { key: 'role', label: 'Role', sortable: true, width: '20%' },
-              { key: 'actions', label: 'Actions', width: '10%' },
-            ]}
-            sortBy={sortBy}
-            sortOrder={sortOrder}
-            isEmpty={users.length === 0}
-            onSortChange={(key, order) => {
-              if (key === 'actions') return;
-              setSortBy(key as typeof sortBy);
-              setSortOrder(order);
-              setPage(1);
-            }}
-          >
-            {users.map((u) => (
-              <tr key={u._id} className="hover:bg-gray-50 transition-colors">
-                <td className="px-4 py-3 flex gap-2 items-center">
-                  <FiUser /> {display(u.name)}
-                </td>
-                <td className="px-4 py-3">{display(u.email)}</td>
-                <td className="px-4 py-3">{display(u.role)}</td>
-                <td className="px-4 py-3 text-right">
-                  <UserActionsDropdown
-                    onEdit={() => setModalUser(u)}
-                    onDelete={() => setDeleteTarget(u)}
-                  />
-                </td>
-              </tr>
-            ))}
-          </Table>
-
-          <div className="flex justify-between p-4">
-            <PageSizeSelect
-              value={pageSize}
-              options={[5, 10, 20]}
-              onChange={(v) => {
-                setPageSize(v);
+          <div className="flex gap-3">
+            <input
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
                 setPage(1);
               }}
+              placeholder={USERS_TEXT.SEARCH_PLACEHOLDER}
+              className="border rounded-lg px-3 py-2 text-sm"
             />
-            <Pagination page={page} totalPages={totalPages} onChange={setPage} />
+
+            <Button onClick={() => setEditUser({} as User)}>
+              <FiUserPlus />
+              {USERS_TEXT.ADD_USER}
+            </Button>
           </div>
         </div>
 
-        <UserFormModal
-          open={!!modalUser}
-          user={modalUser && modalUser._id ? modalUser : null}
-          onClose={() => setModalUser(null)}
-          onSubmit={handleSubmit}
-        />
+        {/* Table */}
+        <Table
+          headers={[
+            { key: 'name', label: USERS_TEXT.TABLE_HEADERS.NAME, sortable: true },
+            { key: 'email', label: USERS_TEXT.TABLE_HEADERS.EMAIL, sortable: true },
+            { key: 'role', label: USERS_TEXT.TABLE_HEADERS.ROLE, sortable: true },
+            { key: 'status', label: USERS_TEXT.TABLE_HEADERS.STATUS, sortable: true },
+            { key: 'actions', label: USERS_TEXT.TABLE_HEADERS.ACTIONS },
+          ]}
+          sortBy={sortBy}
+          sortOrder={sortOrder}
+          isEmpty={users.length === 0}
+          onSortChange={(key, order) => {
+            if (key === 'actions') return;
+            setSortBy(key as typeof sortBy);
+            setSortOrder(order);
+            setPage(1);
+          }}
+        >
+          {users.map((u) => (
+            <tr key={u._id}>
+              <td className="px-4 py-3 flex items-center gap-3">
+                <AvatarInitial name={u.name} />
+                <span>{display(u.name)}</span>
+              </td>
+
+              <td className="px-4 py-3">{display(u.email)}</td>
+              <td className="px-4 py-3">{display(u.role)}</td>
+
+              <td className="px-4 py-3">
+                <Status status={u.status} onConfirm={(next) => handleStatusChange(u._id, next)} />
+              </td>
+
+              <td className="px-4 py-3">
+                <UserActionsDropdown
+                  onView={() => setViewUser(u)}
+                  onEdit={() => setEditUser(u)}
+                  onDelete={() => setDeleteTarget(u)}
+                />
+              </td>
+            </tr>
+          ))}
+        </Table>
+
+        {/* Footer */}
+        <div className="flex justify-between p-4">
+          <PageSizeSelect
+            value={pageSize}
+            options={[...PAGE_SIZE_OPTIONS]}
+            onChange={(v) => {
+              setPageSize(v);
+              setPage(1);
+            }}
+          />
+          <Pagination page={page} totalPages={totalPages} onChange={setPage} />
+        </div>
       </div>
 
+      {/* View */}
+      <UserViewModal open={!!viewUser} user={viewUser} onClose={() => setViewUser(null)} />
+
+      {/* Add / Edit */}
+      <UserFormModal
+        open={!!editUser}
+        user={editUser && editUser._id ? editUser : null}
+        onClose={() => setEditUser(null)}
+        onSubmit={handleSubmit}
+      />
+
+      {/* Delete */}
       <ConfirmDialog
         open={!!deleteTarget}
-        title="Delete User"
-        message={`Are you sure you want to delete "${deleteTarget?.name}"?`}
+        title={USERS_TEXT.DELETE_CONFIRM.TITLE}
+        message={USERS_TEXT.DELETE_CONFIRM.MESSAGE(deleteTarget?.name)}
         onClose={() => setDeleteTarget(null)}
         onConfirm={confirmDelete}
         loading={deleting}

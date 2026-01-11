@@ -35,3 +35,7 @@ export function updateUser(id: string, payload: UpdateUserPayload) {
 export function deleteUser(id: string) {
   return http.delete(`/users/${id}`);
 }
+
+export function updateUserStatus(id: string, isActive: boolean) {
+  return http.patch(`/users/${id}/status`, { isActive });
+}
